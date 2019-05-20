@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Menu"
-            android:label="@string/title_activity_menu"
+            android:name=".InitialPage"
+            android:label="@string/title_activity_initial_page"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".FragmentTab4" />
         <activity android:name=".Login" />

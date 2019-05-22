@@ -14,11 +14,11 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/medication_name"
-            android:nextFocusDown="@+id/text_salary"
+            android:nextFocusDown="@+id/text_quantity"
             android:singleLine="true" />
 
         <EditText
-            android:id="@+id/text_salary"
+            android:id="@+id/text_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="250dp"
@@ -30,7 +30,7 @@
             android:id="@+id/layout_submit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_salary"
+            android:layout_below="@+id/text_quantity"
             android:layout_margin="5dp"
             android:orientation="horizontal"
             android:weightSum="2" >

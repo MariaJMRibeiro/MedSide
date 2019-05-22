@@ -18,33 +18,27 @@ public class frag1 extends Fragment {
         // Required empty public constructor
     }
 
+    DatabaseHelper db;
+    EditText e1,e2;
+    Button b1, b2;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag1, container, false);
-    }
+        View rootView=inflater.inflate(R.layout.fragment_frag1, container, false);
 
-    DatabaseHelper db;
-    EditText e1,e2,e3;
-    Button b1, b2;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        db = new DatabaseHelper(this);
-        e1=(EditText) findViewById(R.id.email);
-        e2=(EditText)findViewById(R.id.pass);
-        e3=(EditText)findViewById(R.id.cpass);
-        b1=(Button)findViewById(R.id.register);
-        b2=(Button)findViewById(R.id.button2);
+        db = new DatabaseHelper(null);
+        e1=(EditText)rootView.findViewById(R.id.text_name);
+        e2=(EditText)rootView.findViewById(R.id.text_quantity);
+        b1=(Button)rootView.findViewById(R.id.button_add);
+        b2=(Button)rootView.findViewById(R.id.button_reset);
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(MainActivity.this,Login.class);
-                startActivity(i);
+                String s1 = e1.getText().toString();
+                db.deleteMedication(s1);
             }
         });
         b1.setOnClickListener( new View.OnClickListener() {
@@ -52,32 +46,25 @@ public class frag1 extends Fragment {
             public void onClick(View v) {
                 String s1 = e1.getText().toString();
                 String s2 = e2.getText().toString();
-                String s3 = e3.getText().toString();
-                if (s1.equals("")||s2.equals("")||s3.equals("")){
-                    Toast.makeText(getApplicationContext(), "Fields are empty", Toast.LENGTH_SHORT).show();
+                int m2 = Integer.parseInt(s2);
+                if (s1.equals("")||s2.equals("")){
+                    Toast.makeText(getActivity().getApplicationContext(), "Fields are empty", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    if (s2.equals(s3)) {
-                        boolean chkemail = db.chkemail(s1);
-                        if (chkemail == true) {
-                            Boolean insert = db.insert(s1, s2);
-                            if (insert == true) {
-                                Toast.makeText(getApplicationContext(), "Register successfully", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
-                    }
+                    Medication medication= new Medication();
+                    medication.setMedicationName(s1);
+                    medication.setQuantity(m2);
+                    db.addMedication(medication);
+                    Toast.makeText(getActivity().getApplicationContext(), "Medication correcty insert", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+        return rootView;
     }
 }
 
 
-}
+
 
 
 

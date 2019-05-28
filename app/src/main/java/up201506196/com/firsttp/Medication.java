@@ -9,14 +9,16 @@ public class Medication {
 
     private String name;
     private int quantity;
+    private String user;
 
     public Medication() {
 
     }
 
-    public Medication(String name, int quantity) {
+    public Medication(String name, int quantity, String user) {
         this.name = name;
         this.quantity = quantity;
+        this.user= user;
     }
 
     public void setName(String name) {
@@ -35,6 +37,9 @@ public class Medication {
         return this.quantity;
     }
 
+    public String getUser() {
+        return this.user;
+    }
 
 
 }

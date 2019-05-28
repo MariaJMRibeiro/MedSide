@@ -40,8 +40,9 @@ public class frag1 extends Fragment {
                 String name=e1.getText().toString();
                 String no=e2.getText().toString();
                 int quantity=Integer.parseInt(no);
+                String user = getActivity().getIntent().getExtras().getString("key_email");
                 Medication medication =
-                        new Medication(name,quantity);
+                        new Medication(name,quantity,user);
                 db.addMedication(medication);
                 e1.setText("");
                 e2.setText("");

@@ -13,19 +13,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_MEDICATION = "medication";
 
+    public static final String COLUMN_MID = "id";
+    public static final String COLUMN_MUSER = "user";
     public static final String COLUMN_MNAME = "name";
     public static final String COLUMN_MQUANTITY = "quantity";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Create table user(email text PRIMARY KEY, password text)");
+        db.execSQL("Create table user( email text primary key, password text)");
         String CREATE_PRODUCTS_TABLE = "CREATE TABLE " +
                 TABLE_MEDICATION + "("
-                + COLUMN_MNAME + " TEXT PRIMARY KEY," +
-                COLUMN_MQUANTITY + " INTEGER)";
+                + COLUMN_MID + " integer primary key autoincrement,"
+                + COLUMN_MNAME + " TEXT,"
+                + COLUMN_MQUANTITY + " INTEGER,"
+                + COLUMN_MUSER + " TEXT,"
+                + " FOREIGN KEY ("+COLUMN_MUSER+") REFERENCES "+"user"+"("+"email"+"));";
         db.execSQL(CREATE_PRODUCTS_TABLE);
     }
 
+    @Override // here I am trying to enable the foreign keys
+    public void onOpen(SQLiteDatabase db) {
+        db.execSQL("PRAGMA foreign_keys=ON");
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -69,6 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_MNAME, medication.getName());
         values.put(COLUMN_MQUANTITY, medication.getQuantity());
+        values.put(COLUMN_MUSER, medication.getUser());
 
         // insert row
         db.insert(TABLE_MEDICATION, null, values);

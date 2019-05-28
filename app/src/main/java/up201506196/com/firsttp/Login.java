@@ -31,6 +31,7 @@ public class Login extends AppCompatActivity {
                 if (Chkemailpass==true) {
                     Toast.makeText(getApplicationContext(), "Successfully Login ", Toast.LENGTH_SHORT).show();
                     Intent i= new Intent(Login.this,InitialPage.class);
+                    i.putExtra("key_email", email);
                     startActivity(i);
                 }
                 else

@@ -11,22 +11,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, "MedLook.db", null, 1);
     }
 
-    private static final int DATABASE_VERSION = 1;
     private static final String TABLE_MEDICATION = "medication";
 
-    public static final String COLUMN_ID = "m_id";
-    public static final String COLUMN_MNAME = "m_name";
-    public static final String COLUMN_MQUANTITY = "m_quantity";
+    public static final String COLUMN_MNAME = "name";
+    public static final String COLUMN_MQUANTITY = "quantity";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Create table user(email text primary key, password text)");
+        db.execSQL("Create table user(email text PRIMARY KEY, password text)");
         String CREATE_PRODUCTS_TABLE = "CREATE TABLE " +
                 TABLE_MEDICATION + "("
-                + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_MNAME
-                + " TEXT," + COLUMN_MQUANTITY + " INTEGER" + ")";
+                + COLUMN_MNAME + " TEXT PRIMARY KEY," +
+                COLUMN_MQUANTITY + " INTEGER)";
         db.execSQL(CREATE_PRODUCTS_TABLE);
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -65,59 +64,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void addMedication(Medication medication) {
 
+        SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues values = new ContentValues();
-        values.put(COLUMN_MNAME, medication.getMedicationName());
+        values.put(COLUMN_MNAME, medication.getName());
         values.put(COLUMN_MQUANTITY, medication.getQuantity());
 
-        SQLiteDatabase db = this.getWritableDatabase();
-
+        // insert row
         db.insert(TABLE_MEDICATION, null, values);
+
+        // close db connection
         db.close();
-    }
 
-    public Medication findMedication(String mname) {
-        String query = "Select * FROM " + TABLE_MEDICATION + " WHERE " + COLUMN_MNAME + " =  \"" + mname + "\"";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        Medication medication = new Medication();
-
-        if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            medication.setID(Integer.parseInt(cursor.getString(0)));
-            medication.setMedicationName(cursor.getString(1));
-            medication.setQuantity(Integer.parseInt(cursor.getString(2)));
-            cursor.close();
-        } else {
-            medication = null;
-        }
-        db.close();
-        return medication;
-    }
-
-    public boolean deleteMedication(String mname) {
-
-        boolean result = false;
-
-        String query = "Select * FROM " + TABLE_MEDICATION + " WHERE " + COLUMN_MNAME + " =  \"" + mname + "\"";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        Medication medication = new Medication();
-
-        if (cursor.moveToFirst()) {
-            medication.setID(Integer.parseInt(cursor.getString(0)));
-            db.delete(TABLE_MEDICATION, COLUMN_ID + " = ?",
-                    new String[] { String.valueOf(medication.getID()) });
-            cursor.close();
-            result = true;
-        }
-        db.close();
-        return result;
     }
 
 

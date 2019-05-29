@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
@@ -85,9 +87,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // close db connection
         db.close();
-
-
     }
 
+    public List<Medication> getAllMedication() {
+        List<Medication>  allmedications = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_MEDICATION
+                + " ORDER BY " +  COLUMN_MNAME + " DESC";
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        //if TABLE has rows
+        if (cursor.moveToFirst()) {
+            //Loop through the table rows
+            do {
+                Medication medication= new Medication();
+                medication.setID(cursor.getInt(cursor.getColumnIndex(COLUMN_MID)));
+                medication.setName(cursor.getString(cursor.getColumnIndex(COLUMN_MNAME)));
+                medication.setQuantity(cursor.getInt(cursor.getColumnIndex(COLUMN_MQUANTITY)));
+                medication.setUser(cursor.getString(cursor.getColumnIndex(COLUMN_MUSER)));
+
+                //Add movie details to list
+                allmedications.add(medication);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return allmedications;
+    }
 }

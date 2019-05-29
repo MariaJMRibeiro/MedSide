@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class Medication {
 
-
+    private int id;
     private String name;
     private int quantity;
     private String user;
@@ -37,9 +37,20 @@ public class Medication {
         return this.quantity;
     }
 
+    public void setID(int id) {
+        this.id = id;
+    }
+
+    public int getID() {
+        return this.id;
+    }
+
     public String getUser() {
         return this.user;
     }
 
+    public void setUser(String user) {
+        this.user = user;
+    }
 
 }

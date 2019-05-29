@@ -14,4 +14,5 @@
     <string name="medication_quantity">Quantity</string>
     <string name="medication_reset">Delete Medication</string>
     <string name="medication_add">Add Medication</string>
+    <string name="medication_return">Return</string>
 </resources>

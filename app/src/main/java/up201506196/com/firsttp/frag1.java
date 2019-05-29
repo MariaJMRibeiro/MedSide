@@ -8,20 +8,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.database.sqlite.SQLiteDatabase;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.database.Cursor;
+
+import java.util.ArrayList;
 
 
 public class frag1 extends Fragment {
 
 
+    DatabaseHelper sqLiteHelper;
+    SQLiteDatabase sqLiteDatabase;
+    Cursor cursor;
+    MedListAdapter listAdapter ;
+    ListView med_list;
 
+    ArrayList<String> name;
+    ArrayList<String> quantity;
 
     public frag1() {
         // Required empty public constructor
     }
 
-    Button b1;
+    Button b1,b2;
+    DatabaseHelper db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +56,63 @@ public class frag1 extends Fragment {
 
             }
         });
+        b2 = (Button) view.findViewById(R.id.button_reset);
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String user = getActivity().getIntent().getExtras().getString("key_email");
+                Intent i= new Intent(getActivity(),Delete_Medication.class);
+                i.putExtra("key_email", user);
+                startActivity(i);
+            }
+        });
+        med_list = (ListView) view.findViewById(R.id.list_med);
+
+        name = new ArrayList<String>();
+
+        quantity = new ArrayList<String>();
+
+        sqLiteHelper = new DatabaseHelper(getActivity());
+    }
+
+    @Override
+    public void onResume() {
+
+        ShowSQLiteDBdata() ;
+
+        super.onResume();
+    }
+
+    private void ShowSQLiteDBdata() {
+
+        String user = getActivity().getIntent().getExtras().getString("key_email");
+        sqLiteDatabase = sqLiteHelper.getWritableDatabase();
+
+        cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+sqLiteHelper.TABLE_MEDICATION + " WHERE " + sqLiteHelper.COLUMN_MUSER + " =? " , new String[]{user});
+
+        name.clear();
+        quantity.clear();
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                name.add(cursor.getString(cursor.getColumnIndex(sqLiteHelper.COLUMN_MNAME)));
+
+                quantity.add(cursor.getString(cursor.getColumnIndex(sqLiteHelper.COLUMN_MQUANTITY)));
+
+
+
+            } while (cursor.moveToNext());
+        }
+
+        listAdapter = new MedListAdapter(getActivity(),
+                name,
+                quantity
+        );
+
+        med_list.setAdapter(listAdapter);
+
+        cursor.close();
     }
 
 

@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, "MedLook.db", null, 1);
     }
 
-    private static final String TABLE_MEDICATION = "medication";
+    public static final String TABLE_MEDICATION = "medication";
 
     public static final String COLUMN_MID = "id";
     public static final String COLUMN_MUSER = "user";
@@ -89,29 +89,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<Medication> getAllMedication() {
-        List<Medication>  allmedications = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABLE_MEDICATION
-                + " ORDER BY " +  COLUMN_MNAME + " DESC";
+    public void deleteMedication(String name, String user){
 
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        SQLiteDatabase db = this.getWritableDatabase();
 
-        //if TABLE has rows
-        if (cursor.moveToFirst()) {
-            //Loop through the table rows
-            do {
-                Medication medication= new Medication();
-                medication.setID(cursor.getInt(cursor.getColumnIndex(COLUMN_MID)));
-                medication.setName(cursor.getString(cursor.getColumnIndex(COLUMN_MNAME)));
-                medication.setQuantity(cursor.getInt(cursor.getColumnIndex(COLUMN_MQUANTITY)));
-                medication.setUser(cursor.getString(cursor.getColumnIndex(COLUMN_MUSER)));
+        // delete raw
+        db.delete(TABLE_MEDICATION, COLUMN_MNAME + "=? AND " + COLUMN_MUSER + "=?",  new String[] {name,user});
 
-                //Add movie details to list
-                allmedications.add(medication);
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return allmedications;
+
     }
+
+
 }

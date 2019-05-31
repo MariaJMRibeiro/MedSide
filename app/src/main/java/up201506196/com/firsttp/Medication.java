@@ -1,9 +1,6 @@
 package up201506196.com.firsttp;
 
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-
 public class Medication {
 
     private int id;

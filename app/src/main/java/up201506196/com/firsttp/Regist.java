@@ -1,18 +1,20 @@
 package up201506196.com.firsttp;
 
-public class Cholesterol {
+public class Regist {
 
     private int id;
     private int value;
     private String user;
+    private String type;
 
-    public Cholesterol() {
+    public Regist() {
 
     }
 
-    public Cholesterol(int value, String user) {
+    public Regist(int value, String user, String type) {
         this.value = value;
         this.user = user;
+        this.type = type;
     }
 
 
@@ -31,6 +33,14 @@ public class Cholesterol {
 
     public int getValue() {
         return this.value;
+    }
+
+    public void setType(int value) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
 

@@ -15,7 +15,12 @@
     <string name="medication_reset">Delete Medication</string>
     <string name="medication_add">Add Medication</string>
     <string name="medication_return">Return</string>
-    <string name="cholesterol_value">Value</string>
+    <string name="cholesterol_value">New Cholesterol Registration</string>
+    <string name="heart_value">New HeartBeat Registration</string>
+    <string name="max_blood_value">New Systolic (Max) Blood Pressure Registration</string>
+    <string name="min_blood_value">New Diastolic (Min) Blood Pressure Registration</string>
+    <string name="weight_value">New Weight Registration</string>
     <string name="add_value">Add Value</string>
+    <string name="add_values">Add Values</string>
 
 </resources>

@@ -1,8 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".frag1"
-    android:background="@android:color/holo_blue_bright">
-</FrameLayout>
+    tools:context=".frag3"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:id="@+id/current_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mark your Date!"
+        android:textAlignment="center"
+        android:textColor="#FFF"
+        android:textSize="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center" />
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:background="@drawable/bg_calendar"
+        android:layout_height="300dp"
+        android:layout_gravity="center">
+
+        <CalendarView
+            android:id="@+id/calender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center">
+
+        </CalendarView>
+
+    </LinearLayout>
+    
+    <Button
+        android:id="@+id/add_appointment"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="10dp"
+        android:textColor="#FFF"
+        android:text="SAVE THE DATE"
+        android:background="@drawable/bg_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

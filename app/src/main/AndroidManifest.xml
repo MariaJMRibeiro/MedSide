@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Delete_Medication"></activity>
+        <activity android:name=".Set_Appointment"></activity>
+        <activity android:name=".Delete_Medication" />
         <activity android:name=".Add_Medication" />
         <activity
             android:name=".InitialPage"
             android:label="@string/title_activity_initial_page"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FragmentTab4" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>

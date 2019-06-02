@@ -21,12 +21,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_MNAME = "name";
     public static final String COLUMN_MQUANTITY = "quantity";
 
-    // Register Cholesterol
-    public static final String TABLE_CHOLESTEROL = "cholesterol";
-    public static final String COLUMN_CID = "id";
-    public static final String COLUMN_CUSER = "user";
-    public static final String COLUMN_CVALUE = "name";
-    public static final String COLUMN_CDATE = "date";
+    // Register Regists
+    public static final String TABLE_REGISTS = "regists";
+    public static final String COLUMN_RID = "id";
+    public static final String COLUMN_RTYPE = "type";
+    public static final String COLUMN_RUSER = "user";
+    public static final String COLUMN_RVALUE = "name";
+    public static final String COLUMN_RDATE = "date";
 
 
 
@@ -44,14 +45,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FOREIGN KEY ("+COLUMN_MUSER+") REFERENCES "+"user"+"("+"email"+"));";
         db.execSQL(CREATE_PRODUCTS_TABLE);
 
-        String CREATE_CHOLESTEROL_TABLE = "CREATE TABLE " +
-                TABLE_CHOLESTEROL + "("
-                + COLUMN_CID + " integer primary key autoincrement,"
-                + COLUMN_CVALUE + " INTEGER,"
-                + COLUMN_CDATE + " DATE,"
-                + COLUMN_CUSER + " TEXT,"
-                + " FOREIGN KEY ("+COLUMN_CUSER+") REFERENCES "+"user"+"("+"email"+"));";
-        db.execSQL(CREATE_CHOLESTEROL_TABLE);
+        String CREATE_REGISTS_TABLE = "CREATE TABLE " +
+                TABLE_REGISTS + "("
+                + COLUMN_RID + " integer primary key autoincrement,"
+                + COLUMN_RVALUE + " INTEGER,"
+                + COLUMN_RDATE + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                + COLUMN_RUSER + " TEXT,"
+                + " FOREIGN KEY ("+COLUMN_RUSER+") REFERENCES "+"user"+"("+"email"+"));";
+        db.execSQL(CREATE_REGISTS_TABLE);
 
     }
 
@@ -125,21 +126,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //Register Cholesterol handling
-    public void addCholesterol(Cholesterol cholesterol) {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date = sdf.format(new Date());
+    //Register Regist handling
+    public void addRegist(Regist regist) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_CVALUE, cholesterol.getValue());
-        values.put(COLUMN_CDATE, date);
-        values.put(COLUMN_CUSER, cholesterol.getUser());
+        values.put(COLUMN_RVALUE, regist.getValue());
+        values.put(COLUMN_RTYPE, regist.getType());
+        values.put(COLUMN_RUSER, regist.getUser());
 
         // insert row
-        db.insert(TABLE_CHOLESTEROL, null, values);
+        db.insert(TABLE_REGISTS, null, values);
 
         // close db connection
         db.close();

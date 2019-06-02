@@ -4,48 +4,173 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/layout_submit"
-        android:layout_width="fill_parent"
+    <Spinner
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="vertical">
+        android:id="@+id/layout_spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp">
 
-        <EditText
-            android:id="@+id/text_name"
+    </Spinner>
+
+    <LinearLayout
+        android:id="@+id/layout_cholesterol"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/layout_spinner">
+
+        <LinearLayout
+            android:id="@+id/layout_submit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/cholesterol_value"
+                android:singleLine="true"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/add_value"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/layout_submit"
+            >
+
+            <com.jjoe64.graphview.GraphView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/graph"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_hear_beat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/layout_spinner">
+
+        <LinearLayout
+            android:id="@+id/hlayout_submit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/htext_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/heart_value"
+                android:singleLine="true"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/hsubmit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/add_value"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/hlayout_submit"
+            >
+
+            <com.jjoe64.graphview.GraphView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/hgraph"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_blood_pressure"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/layout_spinner">
+
+        <LinearLayout
+            android:id="@+id/blayout_submit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <EditText
+            android:id="@+id/bmintext_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/cholesterol_value"
+            android:hint="@string/max_blood_value"
             android:singleLine="true"
             android:layout_gravity="center"/>
 
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/add_value"
-            android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/bmaxtext_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/min_blood_value"
+                android:singleLine="true"
+                android:layout_gravity="center"/>
 
+            <Button
+                android:id="@+id/bsubmit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/add_values"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:layout_below="@id/layout_submit"
-        >
-
-        <com.jjoe64.graphview.GraphView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/graph"
-             />
-
+        android:id="@+id/layout_weight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/layout_spinner">
     </LinearLayout>
+
+
+
+
 
 
 

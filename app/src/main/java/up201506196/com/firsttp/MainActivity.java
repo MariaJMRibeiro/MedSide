@@ -45,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
                         if (chkemail == true) {
                             Boolean insert = db.insert(s1, s2);
                             if (insert == true) {
+                                Intent i= new Intent(MainActivity.this,InitialPage.class);
+                                i.putExtra("key_email", s1);
+                                startActivity(i);
                                 Toast.makeText(getApplicationContext(), "Register successfully", Toast.LENGTH_SHORT).show();
+
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_SHORT).show();

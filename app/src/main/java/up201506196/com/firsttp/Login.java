@@ -29,10 +29,10 @@ public class Login extends AppCompatActivity {
                 String password = e2.getText().toString();
                 Boolean Chkemailpass = db.emailpassword(email,password);
                 if (Chkemailpass==true) {
-                    Toast.makeText(getApplicationContext(), "Successfully Login ", Toast.LENGTH_SHORT).show();
                     Intent i= new Intent(Login.this,InitialPage.class);
                     i.putExtra("key_email", email);
                     startActivity(i);
+                    Toast.makeText(getApplicationContext(), "Successfully Login ", Toast.LENGTH_SHORT).show();
                 }
                 else
                     Toast.makeText(getApplicationContext(), "Email or Password incorrect ", Toast.LENGTH_SHORT).show();

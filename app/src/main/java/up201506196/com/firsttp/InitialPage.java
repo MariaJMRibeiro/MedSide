@@ -57,6 +57,9 @@ public class InitialPage extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
 
+        int index = getIntent().getIntExtra("toOpen", 0);
+        mViewPager.setCurrentItem(index);
+
     }
 
 
@@ -102,6 +105,9 @@ public class InitialPage extends AppCompatActivity {
                 case 2:
                     fragment=new frag3();
                     break;
+                case 3:
+                    fragment=new frag4();
+                    break;
             }
             return fragment;
 
@@ -109,8 +115,8 @@ public class InitialPage extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 4 total pages.
+            return 4;
         }
     }
 }

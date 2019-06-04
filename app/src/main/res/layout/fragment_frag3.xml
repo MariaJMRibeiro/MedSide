@@ -30,12 +30,10 @@
             android:id="@+id/calender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center">
-
-        </CalendarView>
+            android:textAlignment="center"/>
 
     </LinearLayout>
-    
+
     <Button
         android:id="@+id/add_appointment"
         android:layout_gravity="center"

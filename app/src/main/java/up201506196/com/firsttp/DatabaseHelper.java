@@ -29,6 +29,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_RVALUE = "name";
     public static final String COLUMN_RDATE = "date";
 
+    //Appointments
+    public static final String TABLE_App = "appointment";
+    public static final String COLUMN_AID = "id";
+    public static final String COLUMN_AUSER = "user";
+    public static final String COLUMN_ADESCRIPTION = "description";
+    public static final String COLUMN_ADATE = "date";
 
 
 
@@ -54,6 +60,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + " FOREIGN KEY ("+COLUMN_RUSER+") REFERENCES "+"user"+"("+"email"+"));";
         db.execSQL(CREATE_REGISTS_TABLE);
 
+        String CREATE_APP_TABLE = "CREATE TABLE " +
+                TABLE_App + "("
+                + COLUMN_AID + " integer primary key autoincrement,"
+                + COLUMN_ADESCRIPTION + " TEXT,"
+                + COLUMN_ADATE + " DATE,"
+                + COLUMN_AUSER + " TEXT,"
+                + " FOREIGN KEY ("+COLUMN_MUSER+") REFERENCES "+"user"+"("+"email"+"));";
+        db.execSQL(CREATE_APP_TABLE);
+
     }
 
     @Override // here I am trying to enable the foreign keys
@@ -65,12 +80,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists user");
         db.execSQL("DROP TABLE IF EXISTS medication");
-        db.execSQL("DROP TABLE IF EXISTS cholesterol");
+        db.execSQL("DROP TABLE IF EXISTS regists");
+        db.execSQL("DROP TABLE IF EXISTS appointment");
 
         onCreate(db);
     }
-
-
 
     // User handling
     //inserting in database
@@ -141,5 +155,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // close db connection
         db.close();
+    }
+
+    public void addApp(App app){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ADESCRIPTION, app.getDescription());
+        values.put(COLUMN_AUSER, app.getUser());
+        values.put(COLUMN_ADATE, app.getDate());
+
+        // insert row
+        db.insert(TABLE_App, null, values);
+
+        // close db connection
+        db.close();
+
     }
 }

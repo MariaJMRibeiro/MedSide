@@ -11,13 +11,18 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class frag3 extends Fragment {
 
     CalendarView calender;
     TextView currentDate;
     Button b1;
-    boolean setdate=false;
 
 
 
@@ -40,7 +45,7 @@ public class frag3 extends Fragment {
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                final String date= dayOfMonth + "/" + month + "/" + year;
+                final String date= dayOfMonth + "/" + (month+1) + "/" + year;
                 currentDate.setText(date);
                 b1.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -57,4 +62,5 @@ public class frag3 extends Fragment {
         });
 
     }
+
 }

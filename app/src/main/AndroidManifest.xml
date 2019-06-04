@@ -9,6 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDG-SghZYkn7vzkUZae1Jf7w9KSMkPnB78"/>
         <activity android:name=".Set_Appointment"></activity>
         <activity android:name=".Delete_Medication" />
         <activity android:name=".Add_Medication" />
@@ -25,5 +34,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>

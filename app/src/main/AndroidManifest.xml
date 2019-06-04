@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Settings"></activity>
+        <activity android:name=".PersonalInformations"></activity>
+        <activity android:name=".FavoriteLocations" />
+        <activity android:name=".DoctorComunication" />
+        <activity android:name=".ChangePassword" />
+        <activity android:name=".Settings" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />

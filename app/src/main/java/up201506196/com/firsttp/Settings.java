@@ -1,5 +1,6 @@
 package up201506196.com.firsttp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ public class Settings extends AppCompatActivity {
     ListView listView;
 
     // Define string array.
-    String[] listValue = new String[] {"Change Password","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT"};
+    String[] listValue = new String[] {"Change Password","Customise Doctor Communication", "Add Favorite Locations","Personal Information"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -22,7 +23,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         listView = (ListView)findViewById(R.id.listView1);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_2, android.R.id.text1, listValue);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listValue);
 
         listView.setAdapter(adapter);
 
@@ -33,8 +34,33 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO Auto-generated method stub
 
+                String user = getIntent().getExtras().getString("key_email");
+
+                if (position == 0) {
+                    //code specific to first list item
+                    Intent myIntent = new Intent(view.getContext(), ChangePassword.class);
+                    myIntent.putExtra("key email", user);
+                    startActivityForResult(myIntent, 0);
+                }
+                if (position == 1) {
+                    //code specific to first list item
+                    Intent myIntent = new Intent(view.getContext(),DoctorComunication.class);
+                    myIntent.putExtra("key email", user);
+                    startActivityForResult(myIntent, 0);
+                }
+                if (position == 2) {
+                    //code specific to first list item
+                    Intent myIntent = new Intent(view.getContext(), FavoriteLocations.class);
+                    myIntent.putExtra("key email", user);
+                    startActivityForResult(myIntent, 0);
+                }
+                if (position == 3) {
+                    //code specific to first list item
+                    Intent myIntent = new Intent(view.getContext(), PersonalInformations.class);
+                    myIntent.putExtra("key email", user);
+                    startActivityForResult(myIntent, 0);
+                }
             }
         });
 

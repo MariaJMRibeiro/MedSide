@@ -63,10 +63,6 @@ public class InitialPage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.action_settings:
-
-
-                break;
             case R.id.action_settings2:
                 String user = getIntent().getExtras().getString("key_email");
                 Intent intent2 = new Intent(this, Settings.class);

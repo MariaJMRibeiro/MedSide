@@ -9,8 +9,7 @@
     <string name="tab_text_3">Appointments</string>
     <string name="tab_text_2">Registration</string>
     <string name="tab_text_4">Maps</string>
-    <string name="action_settings">Profile</string>
-    <string name="action_settings2">Settings</string>
+    <string name="action_settings2">Profile</string>
     <string name="action_settings3">Log Out</string>
     <string name="title_activity_initial_page">InitialPage</string>
     <string name="medication_name">Name</string>

@@ -100,6 +100,14 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="actual_password">Actual Password</string>
+    <string name="new_password">New Password</string>
+    <string name="new_password_confirm">New Password Confirm</string>
+    <string name="save_new_password">Save New Password</string>
+    <string name="height">Height</string>
+    <string name="age">Age</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="email">Email</string>
 
 
 </resources>

@@ -20,7 +20,7 @@ tools:context=".Add_Medication">
     android:layout_height="wrap_content"
     android:layout_marginStart="250dp"
     android:hint="@string/medication_quantity"
-    android:inputType="numberDecimal"
+    android:inputType="number"
     android:singleLine="true" />
 
 <LinearLayout

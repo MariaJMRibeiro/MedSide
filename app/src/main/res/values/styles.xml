@@ -22,8 +22,6 @@
     </style>
 
     <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">8sp</item>
-        <item name="android:padding">0mm</item>
-        <item name="textAllCaps">true</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

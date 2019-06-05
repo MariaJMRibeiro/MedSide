@@ -56,6 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_RID + " integer primary key autoincrement,"
                 + COLUMN_RVALUE + " INTEGER,"
                 + COLUMN_RDATE + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
+                + COLUMN_RTYPE + " TEXT,"
                 + COLUMN_RUSER + " TEXT,"
                 + " FOREIGN KEY ("+COLUMN_RUSER+") REFERENCES "+"user"+"("+"email"+"));";
         db.execSQL(CREATE_REGISTS_TABLE);

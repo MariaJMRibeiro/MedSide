@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PersonalInformations"></activity>
+        <activity android:name=".AddCho"></activity>
+        <activity android:name=".PersonalInformations" />
         <activity android:name=".FavoriteLocations" />
         <activity android:name=".DoctorComunication" />
         <activity android:name=".ChangePassword" />

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddCho"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginBottom="10dp"
+        android:inputType="number"
+        android:hint="@string/cholesterol_value"
+        android:singleLine="true"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+        android:background="@drawable/bg_button"
+        android:text="@string/add_value"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

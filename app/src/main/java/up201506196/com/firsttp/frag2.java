@@ -1,5 +1,6 @@
 package up201506196.com.firsttp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,12 +26,10 @@ import java.util.List;
 
 public class frag2 extends Fragment {
 
-    EditText e1;
     Button b1;
     DatabaseHelper db;
     SQLiteDatabase sqLiteDatabase;
     Cursor cursor;
-    int value;
     String date;
     int x=0;
     private Spinner mSpinner;
@@ -51,7 +50,6 @@ public class frag2 extends Fragment {
 
 
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-        e1= (EditText) view.findViewById(R.id.text_name);
         b1= (Button) view.findViewById(R.id.submit_button);
         mSpinner = (Spinner) view.findViewById(R.id.layout_spinner);
         String[] regists = new String[]{
@@ -91,23 +89,21 @@ public class frag2 extends Fragment {
                             @Override
                             public void onClick(View v) {
                                 String user = getActivity().getIntent().getExtras().getString("key_email");
-                                String val = e1.getText().toString();
-                                int value = Integer.parseInt(val);
-                                String type= "cholesterol";
-                                Regist regist =
-                                        new  Regist(value,user,type);
-                                db.addRegist(regist);
-                                e1.setText("");
+                                Intent i=new Intent(getActivity(), AddCho.class);
+                                i.putExtra("key_email", user);
+                                startActivity(i);
                             }
                         });
 
+                        int value;
+                        String type="cholesterol";
                         String user = getActivity().getIntent().getExtras().getString("key_email");
                         sqLiteDatabase = db.getReadableDatabase();
                         GraphView graph = (GraphView) view.findViewById(R.id.graph);
                         LineGraphSeries<DataPoint> series;
                         series = new LineGraphSeries<>();
                         graph.addSeries(series);
-                        cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " , new String[]{user});
+                        cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{user,type});
                         if (cursor.moveToFirst()) {
                             do {
                                 value=Integer.parseInt(cursor.getString(cursor.getColumnIndex(db.COLUMN_RVALUE)));

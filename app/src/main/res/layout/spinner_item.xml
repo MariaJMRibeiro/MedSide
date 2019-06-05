@@ -4,6 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
+    android:textAlignment="center"
     android:textStyle="italic"
+    android:textSize="20sp"
+    android:background="@color/colorPrimaryDark"
+    android:textColor="@color/common_google_signin_btn_text_dark_pressed"
     android:fontFamily="sans-serif-medium"
     />

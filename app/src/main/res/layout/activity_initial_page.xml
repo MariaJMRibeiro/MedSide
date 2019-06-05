@@ -32,7 +32,7 @@
             style="@style/MyCustomTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/colorPrimaryDark">
+            app:tabIndicatorColor="@color/colorAccent">
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem"

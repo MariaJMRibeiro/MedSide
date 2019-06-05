@@ -14,12 +14,18 @@ public class DoctorComunication extends AppCompatActivity {
     Button send;
     EditText e1;
     Uri URI = null;
+    String user, doctor_email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_comunication);
-        sendEmail();
+
+        user=getIntent().getStringExtra("key_email");
+        e1 = (EditText)findViewById(R.id.Doctor_Email);
+        doctor_email=e1.getText().toString();
         send = (Button)findViewById(R.id.bsend_email);
+
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,21 +36,18 @@ public class DoctorComunication extends AppCompatActivity {
 
     }
 
-
     public void sendEmail()
     {
         try
         {
-            e1 = (EditText)findViewById(R.id.Doctor_Email);
-            String email=e1.getText().toString();
             final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
             emailIntent.setType("plain/text");
-            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { email });
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { doctor_email });
             emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Mar");
+            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "ajhahahah");
             if (URI != null) {
                 emailIntent.putExtra(Intent.EXTRA_STREAM, URI);
             }
-            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "ajhahahah");
             this.startActivity(Intent.createChooser(emailIntent,"Sending email..."));
         }
         catch (Throwable t)

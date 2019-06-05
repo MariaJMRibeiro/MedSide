@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DoctorComunication">
+    android:layout_height="wrap_content"
+    tools:context=".DoctorComunication"
+    android:layout_marginTop="50dp"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_margin="20sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Your doctor must be always aware of your medical condition. You can send your daily records to him by email. Please enter here the contact:"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/Doctor_Email"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginBottom="20dp"
+        android:inputType="textWebEmailAddress"
+        android:hint="@string/doctor_s_email"
+        android:singleLine="true"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/bsend_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+        android:background="@drawable/bg_button"
+        android:text="@string/send_email"
+        android:padding="10dp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

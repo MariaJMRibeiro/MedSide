@@ -40,8 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Create table user( email text primary key, password text)");
-
+        db.execSQL("Create table user( email text primary key, password text, age int, gender text, height int, doctor_email text)");
         String CREATE_PRODUCTS_TABLE = "CREATE TABLE " +
                 TABLE_MEDICATION + "("
                 + COLUMN_MID + " integer primary key autoincrement,"

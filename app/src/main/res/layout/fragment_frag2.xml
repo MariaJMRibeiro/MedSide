@@ -40,6 +40,7 @@
                 />
         </LinearLayout>
 
+
         <LinearLayout
             android:id="@+id/layout_submit"
             android:layout_width="fill_parent"
@@ -69,22 +70,30 @@
         android:layout_below="@id/layout_spinner">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_gravity="center"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="20dp"
+            >
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/hgraph"
+                android:background="@drawable/bg_calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/hlayout_submit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="20dp"
             android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/htext_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-                android:hint="@string/heart_value"
-                android:textColorHint="@color/common_google_signin_btn_text_dark_pressed"
-                android:singleLine="true"
-                android:layout_gravity="center"/>
 
             <Button
                 android:id="@+id/hsubmit_button"
@@ -98,25 +107,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/bg_calendar"
-            android:layout_below="@id/hlayout_submit"
-            >
-
-            <com.jjoe64.graphview.GraphView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-
-                android:id="@+id/hgraph"
-                />
-
-        </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -127,40 +117,37 @@
         android:layout_below="@id/layout_spinner">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_gravity="center"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="20dp"
+
+            >
+
+            <com.jjoe64.graphview.GraphView
+                android:background="@drawable/bg_calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/bgraph"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/blayout_submit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="20dp"
             android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/bmintext_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-                android:ems="10"
-                android:textColorHint="@color/common_google_signin_btn_text_dark_pressed"
-                android:hint="@string/max_blood_value"
-                android:singleLine="true"
-                android:layout_gravity="center"/>
-
-            <EditText
-                android:id="@+id/bmaxtext_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColorHint="@color/common_google_signin_btn_text_dark_pressed"
-                android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-                android:hint="@string/min_blood_value"
-                android:singleLine="true"
-                android:layout_gravity="center"/>
 
             <Button
                 android:id="@+id/bsubmit_button"
                 android:layout_width="wrap_content"
-                android:background="@drawable/bg_button"
                 android:layout_height="0dp"
                 android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+                android:background="@drawable/bg_button"
                 android:layout_weight="1"
                 android:text="@string/add_values"
                 android:layout_gravity="center"/>

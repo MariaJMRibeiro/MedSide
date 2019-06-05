@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class AddCho extends AppCompatActivity {
+public class AddHeaB extends AppCompatActivity {
 
     EditText e1;
     Button b1;
@@ -16,7 +16,7 @@ public class AddCho extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_cho);
+        setContentView(R.layout.activity_add_hea_b);
         db = new DatabaseHelper(this);
         e1 = (EditText) findViewById(R.id.text_name);
         b1 = (Button) findViewById(R.id.submit_button);
@@ -26,15 +26,16 @@ public class AddCho extends AppCompatActivity {
                 String user = getIntent().getStringExtra("key_email");
                 String val = e1.getText().toString();
                 int value = Integer.parseInt(val);
-                String type= "cholesterol";
+                String type= "heart_beat";
                 Regist regist =
                         new  Regist(value,user,type);
                 db.addRegist(regist);
-                Intent i= new Intent(AddCho.this, InitialPage.class);
+                Intent i= new Intent(AddHeaB.this, InitialPage.class);
                 i.putExtra("key_email", user);
                 i.putExtra("toOpen", 1);
                 startActivity(i);
             }
         });
+
     }
 }

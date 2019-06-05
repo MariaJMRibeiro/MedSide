@@ -33,8 +33,9 @@ public class Add_Medication extends AppCompatActivity {
                 Medication medication =
                         new Medication(name, quantity, user);
                 db.addMedication(medication);
-                e1.setText("");
-                e2.setText("");
+                Intent i= new Intent(Add_Medication.this,InitialPage.class);
+                i.putExtra("key_email", user);
+                startActivity(i);
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {

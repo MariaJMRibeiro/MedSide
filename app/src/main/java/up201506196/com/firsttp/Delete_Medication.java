@@ -27,7 +27,9 @@ public class Delete_Medication extends AppCompatActivity {
                 String user =getIntent().getExtras().getString("key_email");
                 String name = e1.getText().toString();
                 db.deleteMedication(name,user);
-                e1.setText("");
+                Intent i= new Intent(Delete_Medication.this,InitialPage.class);
+                i.putExtra("key_email", user);
+                startActivity(i);
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {

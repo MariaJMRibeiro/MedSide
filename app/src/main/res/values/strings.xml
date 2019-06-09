@@ -19,7 +19,7 @@
     <string name="medication_return">Return</string>
     <string name="medication_title"> Medication</string>
     <string name="medication_quantity_title">Quant.</string>
-    <string name="cholesterol_value">New Record</string>
+    <string name="cholesterol_value">New Record (mg/dl)</string>
     <string name="heart_value">New Record</string>
     <string name="max_blood_value">New Systolic (Max) Record</string>
     <string name="min_blood_value">New Diastolic (Min) Record </string>

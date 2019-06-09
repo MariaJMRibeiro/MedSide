@@ -29,20 +29,20 @@ public class DoctorComunication extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendEmail();
+                sendEmail(doctor_email);
             }
         });
 
 
     }
 
-    public void sendEmail()
+    public void sendEmail(String doctor_email)
     {
         try
         {
             final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
             emailIntent.setType("plain/text");
-            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { doctor_email });
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[]{doctor_email});
             emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Mar");
             emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "ajhahahah");
             if (URI != null) {

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddBP extends AppCompatActivity {
 
@@ -27,20 +28,24 @@ public class AddBP extends AppCompatActivity {
                 String user = getIntent().getStringExtra("key_email");
                 String val1 = e1.getText().toString();
                 String val2 = e2.getText().toString();
-                int value1 = Integer.parseInt(val1);
-                int value2 = Integer.parseInt(val2);
-                String type1= "high_blood_pressure";
-                String type2= "low_blood_pressure";
-                Regist regist1 =
-                        new  Regist(value1,user,type1);
-                db.addRegist(regist1);
-                Regist regist2 =
-                        new  Regist(value2,user,type2);
-                db.addRegist(regist2);
-                Intent i= new Intent(AddBP.this, InitialPage.class);
-                i.putExtra("key_email", user);
-                i.putExtra("toOpen", 1);
-                startActivity(i);
+                if (val1.equals("") || val2.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter both Diastolic and Systolic Blood Pressure", Toast.LENGTH_SHORT).show();
+                } else {
+                    int value1 = Integer.parseInt(val1);
+                    int value2 = Integer.parseInt(val2);
+                    String type1 = "high_blood_pressure";
+                    String type2 = "low_blood_pressure";
+                    Regist regist1 =
+                            new Regist(value1, user, type1);
+                    db.addRegist(regist1);
+                    Regist regist2 =
+                            new Regist(value2, user, type2);
+                    db.addRegist(regist2);
+                    Intent i = new Intent(AddBP.this, InitialPage.class);
+                    i.putExtra("key_email", user);
+                    i.putExtra("toOpen", 1);
+                    startActivity(i);
+                }
             }
         });
 

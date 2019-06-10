@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     DatabaseHelper db;
     EditText e1,e2,e3;
-    Button b1, b2;
+    Button b1;
+    TextView t1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         e2=(EditText)findViewById(R.id.pass);
         e3=(EditText)findViewById(R.id.cpass);
         b1=(Button)findViewById(R.id.register);
-        b2=(Button)findViewById(R.id.button2);
-        b2.setOnClickListener(new View.OnClickListener() {
+        t1=(TextView) findViewById(R.id.button2);
+        t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i= new Intent(MainActivity.this,Login.class);
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         if (chkemail == true) {
                             Boolean insert = db.insert(s1, s2);
                             if (insert == true) {
-                                Intent i= new Intent(MainActivity.this,InitialPage.class);
+                                Intent i= new Intent(MainActivity.this,CompleteRegister.class);
                                 i.putExtra("key_email", s1);
                                 startActivity(i);
                                 Toast.makeText(getApplicationContext(), "Register successfully", Toast.LENGTH_SHORT).show();

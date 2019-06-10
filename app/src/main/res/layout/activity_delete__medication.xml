@@ -13,6 +13,15 @@
         android:hint="@string/medication_name"
         android:singleLine="true" />
 
+    <EditText
+        android:id="@+id/text_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="250dp"
+        android:hint="@string/medication_quantity"
+        android:inputType="number"
+        android:singleLine="true" />
+
     <LinearLayout
         android:id="@+id/layout_submit"
         android:layout_width="fill_parent"
@@ -24,13 +33,18 @@
         <Button
             android:id="@+id/button_reset"
             android:layout_width="0dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginRight="10dp"
             android:text="@string/medication_reset" />
 
         <Button
             android:id="@+id/button_return"
             android:layout_width="0dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/medication_return" />

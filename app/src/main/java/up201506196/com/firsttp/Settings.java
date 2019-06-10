@@ -14,7 +14,7 @@ public class Settings extends AppCompatActivity {
     ListView listView;
 
     // Define string array.
-    String[] listValue = new String[] {"Change Password","Customise Doctor Communication", "Add Favorite Locations","Personal Information"};
+    String[] listValue = new String[] {"Change Password","Customise Doctor Communication", "Personal Information", "Deactivate Account"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,13 +49,10 @@ public class Settings extends AppCompatActivity {
                     myIntent.putExtra("key email", user);
                     startActivityForResult(myIntent, 0);
                 }
-                if (position == 2) {
-                    //code specific to first list item
-                    Intent myIntent = new Intent(view.getContext(), FavoriteLocations.class);
-                    myIntent.putExtra("key email", user);
-                    startActivityForResult(myIntent, 0);
-                }
                 if (position == 3) {
+                    //code specific to first list item
+                }
+                if (position == 2) {
                     //code specific to first list item
                     Intent myIntent = new Intent(view.getContext(), PersonalInformations.class);
                     myIntent.putExtra("key email", user);

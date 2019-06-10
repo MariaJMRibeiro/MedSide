@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +33,7 @@ public class frag2 extends Fragment {
 
     Button b1,b2,b3,b4;
     DatabaseHelper db;
+    EditText e1;
     SQLiteDatabase sqLiteDatabase;
     String date;
     private Spinner mSpinner;
@@ -53,7 +58,7 @@ public class frag2 extends Fragment {
         mSpinner = (Spinner) view.findViewById(R.id.layout_spinner);
         String[] regists = new String[]{
                 "Cholesterol (LDL)",
-                "HeartBeat",
+                "Heart Rate",
                 "Blood Pressure",
                 "Weight",
         };
@@ -124,14 +129,14 @@ public class frag2 extends Fragment {
                         graph.getViewport().setMinY(60);
                         graph.getViewport().setMaxY(190);
                         cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{user,type});
-                        int x=-1;
+                        int x=0;
                         if (cursor.moveToFirst()) {
                             do {
-                                x=x+1;
                                 value=Integer.parseInt(cursor.getString(cursor.getColumnIndex(db.COLUMN_RVALUE)));
                                 date=cursor.getString(cursor.getColumnIndex(db.COLUMN_RDATE));
                                 DataPoint point = new DataPoint(x,value);
                                 series.appendData(point, false, 1000);
+                                x=x+1;
                             } while (cursor.moveToNext());
                         }
                         cursor.close();
@@ -151,7 +156,7 @@ public class frag2 extends Fragment {
                         HIGHrefvalue.appendData( HIGHrefvalue2,false,1000);
 
                         graph.getViewport().setXAxisBoundsManual(true);
-                        graph.getViewport().setMaxX(x);
+                        graph.getViewport().setMaxX(x+1);
 
                         HeartBeat.setVisibility(View.GONE);
                         BloodPressure.setVisibility(View.GONE);
@@ -195,15 +200,15 @@ public class frag2 extends Fragment {
                         graphhb.getViewport().setMinY(40);
                         graphhb.getViewport().setMaxY(140);
                         Cursor cursorhb;
-                        int xhb=-1;
+                        int xhb=0;
                         cursorhb = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{user,typehb});
                         if (cursorhb.moveToFirst()) {
                             do {
-                                xhb=xhb+1;
                                 valuehb=Integer.parseInt(cursorhb.getString(cursorhb.getColumnIndex(db.COLUMN_RVALUE)));
                                 date=cursorhb.getString(cursorhb.getColumnIndex(db.COLUMN_RDATE));
                                 DataPoint pointhb = new DataPoint(xhb,valuehb);
                                 serieshb.appendData(pointhb, false, 1000);
+                                xhb=xhb+1;
                             } while (cursorhb.moveToNext());
                         }
                         cursorhb.close();
@@ -219,7 +224,7 @@ public class frag2 extends Fragment {
                         MINserieshb.appendData( minrefvalue2,false,1000);
 
                         graphhb.getViewport().setXAxisBoundsManual(true);
-                        graphhb.getViewport().setMaxX(xhb);
+                        graphhb.getViewport().setMaxX(xhb+1);
 
                         BloodPressure.setVisibility(View.GONE);
                         Weight.setVisibility(View.GONE);
@@ -269,25 +274,25 @@ public class frag2 extends Fragment {
                         graphbp.getViewport().setMaxY(150);
                         Cursor high_cursorbp;
                         Cursor low_cursorbp;
-                        int high_xbp=-1;
-                        int low_xbp=-1;
+                        int high_xbp=0;
+                        int low_xbp=0;
                         high_cursorbp = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{user,high_typebp});
                         low_cursorbp = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{user,low_typebp});
                         if (high_cursorbp.moveToFirst()) {
                             do {
-                                high_xbp=high_xbp+1;
                                 high_valuebp=Integer.parseInt(high_cursorbp.getString(high_cursorbp.getColumnIndex(db.COLUMN_RVALUE)));
                                 DataPoint high_pointhb = new DataPoint(high_xbp,high_valuebp);
                                 high_seriesbp.appendData( high_pointhb, false, 1000);
+                                high_xbp=high_xbp+1;
                             } while (high_cursorbp.moveToNext());
                         }
                         high_cursorbp.close();
                         if ( low_cursorbp.moveToFirst()) {
                             do {
-                                low_xbp=low_xbp+1;
                                 low_valuebp=Integer.parseInt(low_cursorbp.getString(low_cursorbp.getColumnIndex(db.COLUMN_RVALUE)));
                                 DataPoint low_pointhb = new DataPoint(low_xbp,low_valuebp);
                                 low_seriesbp.appendData(low_pointhb, false, 1000);
+                                low_xbp=low_xbp+1;
                             } while (low_cursorbp.moveToNext());
                         }
                         low_cursorbp.close();
@@ -313,6 +318,94 @@ public class frag2 extends Fragment {
                         HeartBeat.setVisibility(View.GONE);
                         BloodPressure.setVisibility(View.GONE);
                         Weight.setVisibility(View.VISIBLE);
+                        final TextView results=view.findViewById(R.id.set_bmi_text);
+                        final LinearLayout bmi_1=view.findViewById(R.id.imageView1);
+                        final LinearLayout bmi_2=view.findViewById(R.id.imageView2);
+                        final LinearLayout bmi_3=view.findViewById(R.id.imageView3);
+                        final LinearLayout bmi_4=view.findViewById(R.id.imageView4);
+                        final LinearLayout bmi_5=view.findViewById(R.id.imageView5);
+                        results.setVisibility(View.GONE);
+                        bmi_1.setVisibility(View.GONE);
+                        bmi_2.setVisibility(View.GONE);
+                        bmi_3.setVisibility(View.GONE);
+                        bmi_4.setVisibility(View.GONE);
+                        bmi_5.setVisibility(View.GONE);
+
+                        b4=view.findViewById(R.id.submit_button_bmi);
+                        b4.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                e1=view.findViewById(R.id.weight_value);
+                                final String s1=e1.getText().toString();
+                                if (TextUtils.isEmpty(s1)){
+                                    Toast.makeText(getActivity(), "Insert your current weight", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    int i1=Integer.parseInt(s1);
+                                    results.setVisibility(View.VISIBLE);
+                                    String text;
+                                    double IMC=i1/(1.65*1.65);
+                                    DecimalFormat df = new DecimalFormat("0.00");
+                                    if (IMC<18.5) {
+                                        text="Caution, your BMI is "+ df.format(IMC) +". You are Underweight.";
+                                        bmi_2.setVisibility(View.GONE);
+                                        bmi_3.setVisibility(View.GONE);
+                                        bmi_4.setVisibility(View.GONE);
+                                        bmi_5.setVisibility(View.GONE);
+                                        bmi_1.setVisibility(View.VISIBLE);
+                                    }else if (IMC>18.4 && IMC<25) {
+                                        text="Congrats, your BMI is "+df.format(IMC)+". You weight is normal.";
+                                        bmi_2.setVisibility(View.VISIBLE);
+                                        bmi_1.setVisibility(View.GONE);
+                                        bmi_3.setVisibility(View.GONE);
+                                        bmi_4.setVisibility(View.GONE);
+                                        bmi_5.setVisibility(View.GONE);
+                                    }else if (IMC>24.9 && IMC<30) {
+                                        text="Caution, your BMI is "+df.format(IMC)+". You are Overweight (Pre Obesity).";
+                                        bmi_3.setVisibility(View.VISIBLE);
+                                        bmi_1.setVisibility(View.GONE);
+                                        bmi_2.setVisibility(View.GONE);
+                                        bmi_4.setVisibility(View.GONE);
+                                        bmi_5.setVisibility(View.GONE);
+                                    }else if (IMC>29.9 && IMC<35) {
+                                        text="Caution, your BMI is "+df.format(IMC)+". You are in Class I Obesity.";
+                                        bmi_4.setVisibility(View.VISIBLE);
+                                        bmi_1.setVisibility(View.GONE);
+                                        bmi_2.setVisibility(View.GONE);
+                                        bmi_3.setVisibility(View.GONE);
+                                        bmi_5.setVisibility(View.GONE);
+                                    }else if (IMC>34.9 && IMC<40) {
+                                        text="Caution, your BMI is "+df.format(IMC)+". You are in Class II Obesity.";
+                                        bmi_5.setVisibility(View.VISIBLE);
+                                        bmi_1.setVisibility(View.GONE);
+                                        bmi_2.setVisibility(View.GONE);
+                                        bmi_3.setVisibility(View.GONE);
+                                        bmi_4.setVisibility(View.GONE);
+                                    }else{
+                                        text="Caution, your BMI is "+df.format(IMC)+". You are in Class III Obesity.";
+                                        bmi_5.setVisibility(View.VISIBLE);
+                                        bmi_1.setVisibility(View.GONE);
+                                        bmi_2.setVisibility(View.GONE);
+                                        bmi_3.setVisibility(View.GONE);
+                                        bmi_4.setVisibility(View.GONE);
+                                    }
+                                    results.setText(text);
+
+                                }
+                            }
+                        });
+
+
+
+
+
+
+
+
+
+
+
+
                         break;
                     }
                 }

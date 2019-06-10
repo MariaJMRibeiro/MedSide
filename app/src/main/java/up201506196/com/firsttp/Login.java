@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
     EditText e1,e2;
-    Button b1,b2;
+    Button b1;
+    TextView t1;
     DatabaseHelper db;
 
     @Override
@@ -38,8 +40,8 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Email or Password incorrect ", Toast.LENGTH_SHORT).show();
             }
         });
-        b2=(Button)findViewById(R.id.NRegister);
-        b2.setOnClickListener(new View.OnClickListener() {
+        t1=(TextView) findViewById(R.id.NRegister);
+        t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i= new Intent(Login.this,MainActivity.class);

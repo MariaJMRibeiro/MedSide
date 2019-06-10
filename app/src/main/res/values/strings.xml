@@ -1,15 +1,15 @@
 <resources>
-    <string name="app_name">MedLook</string>
+    <string name="app_name">MedSide</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="no_account_yet">No account yet?</string>
+    <string name="no_account_yet">Don\'t have an account?</string>
     <string name="title_activity_menu">Menu</string>
     <string name="tab_text_1">Stock</string>
     <string name="tab_text_3">Appt.</string>
     <string name="tab_text_2">Records</string>
     <string name="tab_text_4">Maps</string>
-    <string name="action_settings2">Profile</string>
+    <string name="action_settings2">Settings</string>
     <string name="action_settings3">Log Out</string>
     <string name="title_activity_initial_page">InitialPage</string>
     <string name="medication_name">Name</string>
@@ -27,7 +27,8 @@
     <string name="add_value">Add Value</string>
     <string name="add_values">Add Values</string>
     <string name="title_activity_settings">Settings</string>
-
+    <string name="weight_kg">Weight (kg)</string>
+    <string name="results">TextView to comport BMI results and state</string>
 
     <!-- Strings related to Settings -->
     <string name="actual_password">Actual Password</string>
@@ -40,6 +41,7 @@
     <string name="gender">Gender</string>
     <string name="doctor_s_email">Doctor\'s Email</string>
     <string name="send_email">Send Email</string>
+    <string name="view_last_records">View Last Records</string>
 
 
 </resources>

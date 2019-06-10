@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -111,12 +112,16 @@ public class frag2 extends Fragment {
                         LineGraphSeries<DataPoint> HIGHrefvalue;
 
                         series = new LineGraphSeries<>();
+                        series.setTitle("LDL");
 
                         refvalue = new LineGraphSeries<>();
+                        refvalue.setTitle("Optimal");
                         refvalue.setColor(Color.GREEN);
                         MEDrefvalue = new LineGraphSeries<>();
+                        MEDrefvalue.setTitle("Medium");
                         MEDrefvalue.setColor(Color.YELLOW);
                         HIGHrefvalue = new LineGraphSeries<>();
+                        HIGHrefvalue.setTitle("High");
                         HIGHrefvalue.setColor(Color.RED);
 
                         graph.addSeries(series);
@@ -124,10 +129,14 @@ public class frag2 extends Fragment {
                         graph.addSeries(HIGHrefvalue);
                         graph.addSeries(MEDrefvalue);
 
+                        graph.getLegendRenderer().setVisible(true);
+                        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                        graph.getLegendRenderer().setBackgroundColor(Color.argb(00,00,00,00));
+
                         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
                         graph.getViewport().setYAxisBoundsManual(true);
                         graph.getViewport().setMinY(60);
-                        graph.getViewport().setMaxY(190);
+                        graph.getViewport().setMaxY(220);
                         cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{user,type});
                         int x=0;
                         if (cursor.moveToFirst()) {
@@ -185,16 +194,22 @@ public class frag2 extends Fragment {
                         LineGraphSeries<DataPoint> MAXserieshb;
 
                         serieshb = new LineGraphSeries<>();
-                        MINserieshb = new LineGraphSeries<>();
-                        MINserieshb.setColor(Color.GREEN);
+                        serieshb.setTitle("Heart Rate");
                         MAXserieshb = new LineGraphSeries<>();
-                        MAXserieshb.setColor(Color.GREEN);
+                        MAXserieshb.setTitle("Max");
+                        MAXserieshb.setColor(Color.RED);
+                        MINserieshb = new LineGraphSeries<>();
+                        MINserieshb.setTitle("Min");
+                        MINserieshb.setColor(Color.GREEN);
+
 
                         graphhb.addSeries(serieshb);
                         graphhb.addSeries(MINserieshb);
                         graphhb.addSeries(MAXserieshb);
 
-
+                        graphhb.getLegendRenderer().setVisible(true);
+                        graphhb.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                        graphhb.getLegendRenderer().setBackgroundColor(Color.argb(00,00,00,00));
                         graphhb.getGridLabelRenderer().setHorizontalLabelsVisible(false);
                         graphhb.getViewport().setYAxisBoundsManual(true);
                         graphhb.getViewport().setMinY(40);
@@ -256,11 +271,16 @@ public class frag2 extends Fragment {
                         LineGraphSeries<DataPoint> MAXref;
 
                         high_seriesbp = new LineGraphSeries<>();
+                        high_seriesbp.setTitle("Systolic");
+                        high_seriesbp.setColor(Color.BLACK);
                         low_seriesbp = new LineGraphSeries<>();
+                        low_seriesbp.setTitle("Diastolic");
                         MINref = new LineGraphSeries<>();
+                        MINref.setTitle("Dias. Ref.");
                         MINref.setColor(Color.GREEN);
                         MAXref = new LineGraphSeries<>();
-                        MAXref.setColor(Color.GREEN);
+                        MAXref.setTitle("Sys. Ref");
+                        MAXref.setColor(Color.RED);
 
 
                         graphbp.addSeries(high_seriesbp);
@@ -268,6 +288,9 @@ public class frag2 extends Fragment {
                         graphbp.addSeries(MINref);
                         graphbp.addSeries(MAXref);
 
+                        graphbp.getLegendRenderer().setVisible(true);
+                        graphbp.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+                        graphbp.getLegendRenderer().setBackgroundColor(Color.argb(00,00,00,00));
                         graphbp.getGridLabelRenderer().setHorizontalLabelsVisible(false);
                         graphbp.getViewport().setYAxisBoundsManual(true);
                         graphbp.getViewport().setMinY(40);
@@ -319,12 +342,14 @@ public class frag2 extends Fragment {
                         BloodPressure.setVisibility(View.GONE);
                         Weight.setVisibility(View.VISIBLE);
                         final TextView results=view.findViewById(R.id.set_bmi_text);
+                        final LinearLayout bmi_default=view.findViewById(R.id.imageViewdefault);
                         final LinearLayout bmi_1=view.findViewById(R.id.imageView1);
                         final LinearLayout bmi_2=view.findViewById(R.id.imageView2);
                         final LinearLayout bmi_3=view.findViewById(R.id.imageView3);
                         final LinearLayout bmi_4=view.findViewById(R.id.imageView4);
                         final LinearLayout bmi_5=view.findViewById(R.id.imageView5);
                         results.setVisibility(View.GONE);
+                        bmi_default.setVisibility(View.VISIBLE);
                         bmi_1.setVisibility(View.GONE);
                         bmi_2.setVisibility(View.GONE);
                         bmi_3.setVisibility(View.GONE);
@@ -348,6 +373,7 @@ public class frag2 extends Fragment {
                                     DecimalFormat df = new DecimalFormat("0.00");
                                     if (IMC<18.5) {
                                         text="Caution, your BMI is "+ df.format(IMC) +". You are Underweight.";
+                                        bmi_default.setVisibility(View.GONE);
                                         bmi_2.setVisibility(View.GONE);
                                         bmi_3.setVisibility(View.GONE);
                                         bmi_4.setVisibility(View.GONE);
@@ -356,6 +382,7 @@ public class frag2 extends Fragment {
                                     }else if (IMC>18.4 && IMC<25) {
                                         text="Congrats, your BMI is "+df.format(IMC)+". You weight is normal.";
                                         bmi_2.setVisibility(View.VISIBLE);
+                                        bmi_default.setVisibility(View.GONE);
                                         bmi_1.setVisibility(View.GONE);
                                         bmi_3.setVisibility(View.GONE);
                                         bmi_4.setVisibility(View.GONE);
@@ -363,6 +390,7 @@ public class frag2 extends Fragment {
                                     }else if (IMC>24.9 && IMC<30) {
                                         text="Caution, your BMI is "+df.format(IMC)+". You are Overweight (Pre Obesity).";
                                         bmi_3.setVisibility(View.VISIBLE);
+                                        bmi_default.setVisibility(View.GONE);
                                         bmi_1.setVisibility(View.GONE);
                                         bmi_2.setVisibility(View.GONE);
                                         bmi_4.setVisibility(View.GONE);
@@ -370,6 +398,7 @@ public class frag2 extends Fragment {
                                     }else if (IMC>29.9 && IMC<35) {
                                         text="Caution, your BMI is "+df.format(IMC)+". You are in Class I Obesity.";
                                         bmi_4.setVisibility(View.VISIBLE);
+                                        bmi_default.setVisibility(View.GONE);
                                         bmi_1.setVisibility(View.GONE);
                                         bmi_2.setVisibility(View.GONE);
                                         bmi_3.setVisibility(View.GONE);
@@ -377,6 +406,7 @@ public class frag2 extends Fragment {
                                     }else if (IMC>34.9 && IMC<40) {
                                         text="Caution, your BMI is "+df.format(IMC)+". You are in Class II Obesity.";
                                         bmi_5.setVisibility(View.VISIBLE);
+                                        bmi_default.setVisibility(View.GONE);
                                         bmi_1.setVisibility(View.GONE);
                                         bmi_2.setVisibility(View.GONE);
                                         bmi_3.setVisibility(View.GONE);
@@ -384,6 +414,7 @@ public class frag2 extends Fragment {
                                     }else{
                                         text="Caution, your BMI is "+df.format(IMC)+". You are in Class III Obesity.";
                                         bmi_5.setVisibility(View.VISIBLE);
+                                        bmi_default.setVisibility(View.GONE);
                                         bmi_1.setVisibility(View.GONE);
                                         bmi_2.setVisibility(View.GONE);
                                         bmi_3.setVisibility(View.GONE);

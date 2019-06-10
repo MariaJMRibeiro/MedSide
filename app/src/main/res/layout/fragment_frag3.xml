@@ -34,15 +34,36 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/add_appointment"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:textSize="10dp"
-        android:textColor="#FFF"
-        android:text="SAVE THE DATE"
-        android:background="@drawable/bg_button"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/add_appointment"
+            android:textSize="10dp"
+            android:textColor="#FFF"
+            android:text="SAVE THE DATE"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/bg_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/all_appointment"
+            android:textSize="10dp"
+            android:textColor="#FFF"
+            android:text="Show all appointments"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:background="@drawable/bg_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

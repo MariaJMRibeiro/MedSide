@@ -31,9 +31,9 @@
     <string name="results">TextView to comport BMI results and state</string>
 
     <!-- Strings related to Settings -->
-    <string name="actual_password">Actual Password</string>
+    <string name="actual_password">Current Password</string>
     <string name="new_password">New Password</string>
-    <string name="new_password_confirm">New Password Confirm</string>
+    <string name="new_password_confirm">Confirm New Password </string>
     <string name="save_new_password">Save New Password</string>
     <string name="height">Height (cm)</string>
     <string name="age">Age</string>

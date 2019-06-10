@@ -16,8 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CompleteRegister"></activity>
-        <activity android:name=".AddBP"></activity>
+        <activity android:name=".DeactivateAccount"></activity>
+        <activity android:name=".CompleteRegister" />
+        <activity android:name=".AddBP" />
         <activity android:name=".AddHeaB" />
         <activity android:name=".AddCho" />
         <activity android:name=".PersonalInformations" />

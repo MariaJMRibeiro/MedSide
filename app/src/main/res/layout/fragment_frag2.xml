@@ -30,6 +30,7 @@
             android:layout_margin="20dp"
 
             >
+
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="wrap_content"
@@ -41,6 +42,7 @@
                 android:layout_marginRight="-15dp"
                 android:textSize="12sp"
                 android:text="mg/dl"/>
+
 
             <com.jjoe64.graphview.GraphView
                 android:layout_width="wrap_content"
@@ -260,6 +262,8 @@
                 android:id="@+id/weight_value"
                 android:inputType="number"
                 android:hint="@string/weight_kg"
+                android:textColorHint="@color/colorPrimary"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"/>
@@ -294,7 +298,21 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/imageViewdefault">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    app:srcCompat="@drawable/bmi_default" />
+
+            </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -308,7 +326,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -323,7 +341,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -340,7 +358,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -356,7 +374,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"

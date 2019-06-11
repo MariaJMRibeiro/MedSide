@@ -66,11 +66,11 @@ public class frag2 extends Fragment {
         db = new DatabaseHelper(getActivity());
         sqLiteDatabase = db.getReadableDatabase();
 
-        final List<String> plantsList = new ArrayList<>(Arrays.asList(regists));
+        final List<String> RecordsList = new ArrayList<>(Arrays.asList(regists));
 
         // Initializing an ArrayAdapter
         final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                getActivity(),R.layout.spinner_item,plantsList){
+                getActivity(),R.layout.spinner_item,RecordsList){
             @Override
             public View getDropDownView(int position, View convertView,
                                         ViewGroup parent) {

@@ -7,27 +7,32 @@
     tools:context=".frag3"
     android:orientation="vertical"
     android:paddingTop="20dp"
+    android:gravity="center_horizontal"
     android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/current_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Favorite Destinations"
-        android:textAlignment="center"
+        android:text="Your Current Location"
         android:textColor="#FFF"
         android:textSize="30sp"
         android:layout_gravity="center" />
+
+    <Spinner
+        android:id="@+id/spinnerlocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@drawable/bg_calendar"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="100dp">
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical">
 
         <fragment
             android:layout_width="match_parent"

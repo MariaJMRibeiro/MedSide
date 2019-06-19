@@ -68,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_UNAME + " TEXT,"
                 + COLUMN_UPASSWORD + " TEXT,"
                 + COLUMN_UDATE + " DATE,"
-                + COLUMN_UGENDER + " BOOLEAN,"
+                + COLUMN_UGENDER + " BOOLEAN," // 1 for F, 0 for M
                 + COLUMN_UHEIGHT + " integer)";
         db.execSQL(CREATE_USER_TABLE);
 
@@ -156,6 +156,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.getCount()>0) return true;
         else return false;
 
+    }
+
+
+    //inserting in database
+    public void CompleteRegistration(int id, String name, String gender,int height, String birthdate ){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_UNAME, name);
+        boolean real_gender = gender.equals("F");
+        contentValues.put(COLUMN_UGENDER, real_gender);
+        contentValues.put(COLUMN_UHEIGHT, height);
+        contentValues.put(COLUMN_UDATE, birthdate);
+
+        db.update(TABLE_USER,  contentValues, COLUMN_UID+"=?", new String[]{String.valueOf(id)});
+
+        // close db connection
+        db.close();
     }
 
 

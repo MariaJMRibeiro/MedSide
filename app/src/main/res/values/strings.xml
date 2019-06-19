@@ -38,10 +38,13 @@
     <string name="height">Height (cm)</string>
     <string name="age">Age</string>
     <string name="save_changes">Save Changes</string>
-    <string name="gender">Gender</string>
+    <string name="gender">Gender (F/M)</string>
     <string name="doctor_s_email">Doctor\'s Email</string>
     <string name="send_email">Send Email</string>
     <string name="view_last_records">View Last Records</string>
+    <string name="birthdate">Birthdate (YYYY-MM-DD)</string>
+    <string name="complete_register">Almost done! Complete your Account Registration now!</string>
+    <string name="name">Name</string>
 
 
 </resources>

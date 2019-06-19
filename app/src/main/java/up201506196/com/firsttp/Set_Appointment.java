@@ -32,7 +32,7 @@ public class Set_Appointment extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user=getIntent().getStringExtra("key_email");
+                int user=getIntent().getIntExtra("key_email",1);
                 String adescription = description.getText().toString();
                 App app =
                         new App(adescription, add_date, user);

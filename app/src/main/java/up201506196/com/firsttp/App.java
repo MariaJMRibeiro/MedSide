@@ -5,19 +5,29 @@ import java.util.Date;
 public class App {
 
     private int id;
+    private String title;
     private String description;
     private String date;
-    private String user;
+    private int user;
 
     public App() {
 
     }
 
-    public App(String description,String date, String user) {
+    public App(String description,String date, int user) {
         this.description = description;
         this.date = date;
         this.user= user;
     }
+
+    public void setTitle(String name) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
 
     public void setDescription(String name) {
         this.description = description;
@@ -43,11 +53,11 @@ public class App {
         return this.id;
     }
 
-    public String getUser() {
+    public int getUser() {
         return this.user;
     }
 
-    public void setUser(String user) {
+    public void setUser(int user) {
         this.user = user;
     }
 }

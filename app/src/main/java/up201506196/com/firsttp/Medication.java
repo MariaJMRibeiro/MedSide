@@ -6,13 +6,13 @@ public class Medication {
     private int id;
     private String name;
     private int quantity;
-    private String user;
+    private int user;
 
     public Medication() {
 
     }
 
-    public Medication(String name, int quantity, String user) {
+    public Medication(String name, int quantity, int user) {
         this.name = name;
         this.quantity = quantity;
         this.user= user;
@@ -42,11 +42,11 @@ public class Medication {
         return this.id;
     }
 
-    public String getUser() {
+    public int getUser() {
         return this.user;
     }
 
-    public void setUser(String user) {
+    public void setUser(int user) {
         this.user = user;
     }
 

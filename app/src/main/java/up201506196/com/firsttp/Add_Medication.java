@@ -29,7 +29,7 @@ public class Add_Medication extends AppCompatActivity {
                 String name = e1.getText().toString();
                 String no = e2.getText().toString();
                 int quantity = Integer.parseInt(no);
-                String user = getIntent().getExtras().getString("key_email");
+                int user = getIntent().getIntExtra("key_email",1);
                 Medication medication =
                         new Medication(name, quantity, user);
                 db.addMedication(medication);
@@ -41,7 +41,7 @@ public class Add_Medication extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user = getIntent().getExtras().getString("key_email");
+                int user = getIntent().getIntExtra("key_email",1);
                 Intent i= new Intent(Add_Medication.this, InitialPage.class);
                 i.putExtra("key_email", user);
                 startActivity(i);

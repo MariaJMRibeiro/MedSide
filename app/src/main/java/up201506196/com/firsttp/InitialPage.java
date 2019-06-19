@@ -64,7 +64,7 @@ public class InitialPage extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_settings2:
-                String user = getIntent().getExtras().getString("key_email");
+                int user = getIntent().getIntExtra("key_email",1);
                 Intent intent2 = new Intent(this, Settings.class);
                 intent2.putExtra("key email",user);
                 this.startActivity(intent2);

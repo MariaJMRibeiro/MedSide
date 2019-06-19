@@ -1,17 +1,18 @@
 package up201506196.com.firsttp;
 
-public class Regist {
+public class Record {
 
     private int id;
-    private int value;
-    private String user;
     private String type;
+    private int value;
+    private int user;
 
-    public Regist() {
+
+    public Record() {
 
     }
 
-    public Regist(int value, String user, String type) {
+    public Record(int value, int user, String type) {
         this.value = value;
         this.user = user;
         this.type = type;
@@ -43,14 +44,15 @@ public class Regist {
         return this.type;
     }
 
+    public void setUser(int user) {
+        this.user = user;
+    }
 
-    public String getUser() {
+    public int getUser() {
         return this.user;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+
 
 }
 

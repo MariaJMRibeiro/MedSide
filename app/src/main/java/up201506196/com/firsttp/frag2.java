@@ -87,7 +87,7 @@ public class frag2 extends Fragment {
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                final String user = getActivity().getIntent().getExtras().getString("key_email");
+                final int user = getActivity().getIntent().getIntExtra("key_email",1);
                 switch(position) {
                     case 0:
                         Cholesterol.setVisibility(View.VISIBLE);
@@ -137,7 +137,7 @@ public class frag2 extends Fragment {
                         graph.getViewport().setYAxisBoundsManual(true);
                         graph.getViewport().setMinY(60);
                         graph.getViewport().setMaxY(220);
-                        cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{user,type});
+                        cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_RECORD + " WHERE " + db.COLUMN_MUSER + " = ? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{String.valueOf(user),type});
                         int x=0;
                         if (cursor.moveToFirst()) {
                             do {
@@ -216,7 +216,7 @@ public class frag2 extends Fragment {
                         graphhb.getViewport().setMaxY(140);
                         Cursor cursorhb;
                         int xhb=0;
-                        cursorhb = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{user,typehb});
+                        cursorhb = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_RECORD + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{String.valueOf(user),typehb});
                         if (cursorhb.moveToFirst()) {
                             do {
                                 valuehb=Integer.parseInt(cursorhb.getString(cursorhb.getColumnIndex(db.COLUMN_RVALUE)));
@@ -299,8 +299,8 @@ public class frag2 extends Fragment {
                         Cursor low_cursorbp;
                         int high_xbp=0;
                         int low_xbp=0;
-                        high_cursorbp = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{user,high_typebp});
-                        low_cursorbp = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_REGISTS + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{user,low_typebp});
+                        high_cursorbp = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_RECORD + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{String.valueOf(user),high_typebp});
+                        low_cursorbp = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_RECORD + " WHERE " + db.COLUMN_MUSER + " =? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{String.valueOf(user),low_typebp});
                         if (high_cursorbp.moveToFirst()) {
                             do {
                                 high_valuebp=Integer.parseInt(high_cursorbp.getString(high_cursorbp.getColumnIndex(db.COLUMN_RVALUE)));

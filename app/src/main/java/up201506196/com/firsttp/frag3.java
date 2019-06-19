@@ -50,7 +50,7 @@ public class frag3 extends Fragment {
                 b1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String user = getActivity().getIntent().getExtras().getString("key_email");
+                        int user = getActivity().getIntent().getIntExtra("key_email",1);
                         Intent i= new Intent(getActivity(),Set_Appointment.class);
                         i.putExtra("date",date);
                         i.putExtra("key_email",user);

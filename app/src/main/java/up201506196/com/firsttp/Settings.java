@@ -35,7 +35,7 @@ public class Settings extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                String user = getIntent().getExtras().getString("key_email");
+                int user = getIntent().getIntExtra("key_email",1);
 
                 if (position == 0) {
                     //code specific to first list item

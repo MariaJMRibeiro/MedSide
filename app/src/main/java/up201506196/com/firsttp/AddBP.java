@@ -25,7 +25,7 @@ public class AddBP extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user = getIntent().getStringExtra("key_email");
+                int user = getIntent().getIntExtra("key_email",1);
                 String val1 = e1.getText().toString();
                 String val2 = e2.getText().toString();
                 if (val1.equals("") || val2.equals("")) {
@@ -35,12 +35,12 @@ public class AddBP extends AppCompatActivity {
                     int value2 = Integer.parseInt(val2);
                     String type1 = "high_blood_pressure";
                     String type2 = "low_blood_pressure";
-                    Regist regist1 =
-                            new Regist(value1, user, type1);
-                    db.addRegist(regist1);
-                    Regist regist2 =
-                            new Regist(value2, user, type2);
-                    db.addRegist(regist2);
+                    Record regist1 =
+                            new Record(value1, user, type1);
+                    db.addRecord(regist1);
+                    Record regist2 =
+                            new Record(value2, user, type2);
+                    db.addRecord(regist2);
                     Intent i = new Intent(AddBP.this, InitialPage.class);
                     i.putExtra("key_email", user);
                     i.putExtra("toOpen", 1);

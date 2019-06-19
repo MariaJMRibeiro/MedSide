@@ -14,14 +14,15 @@ public class DoctorComunication extends AppCompatActivity {
     Button send;
     EditText e1;
     Uri URI = null;
-    String user, doctor_email;
+    String doctor_email;
+    int user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_comunication);
 
-        user=getIntent().getStringExtra("key_email");
+        user=getIntent().getIntExtra("key_email",1);
         e1 = (EditText)findViewById(R.id.Doctor_Email);
         doctor_email=e1.getText().toString();
         send = (Button)findViewById(R.id.bsend_email);

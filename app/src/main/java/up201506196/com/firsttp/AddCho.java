@@ -23,13 +23,13 @@ public class AddCho extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user = getIntent().getStringExtra("key_email");
+                int user = getIntent().getIntExtra("key_email",1);
                 String val = e1.getText().toString();
                 int value = Integer.parseInt(val);
                 String type= "cholesterol";
-                Regist regist =
-                        new  Regist(value,user,type);
-                db.addRegist(regist);
+                Record regist =
+                        new  Record(value,user,type);
+                db.addRecord(regist);
                 Intent i= new Intent(AddCho.this, InitialPage.class);
                 i.putExtra("key_email", user);
                 i.putExtra("toOpen", 1);

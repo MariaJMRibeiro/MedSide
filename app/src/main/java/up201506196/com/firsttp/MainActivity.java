@@ -1,6 +1,8 @@
 package up201506196.com.firsttp;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     DatabaseHelper db;
+    SQLiteDatabase sqLiteDatabase;
     EditText e1,e2,e3;
     Button b1;
     TextView t1;
@@ -48,7 +51,12 @@ public class MainActivity extends AppCompatActivity {
                             Boolean insert = db.insert(s1, s2);
                             if (insert == true) {
                                 Intent i= new Intent(MainActivity.this,CompleteRegister.class);
-                                i.putExtra("key_email", s1);
+
+                                sqLiteDatabase = db.getReadableDatabase();
+                                Cursor cursor = sqLiteDatabase.rawQuery("SELECT  * FROM "+db.TABLE_USER, null);
+                                cursor.moveToLast();
+                                int user =cursor.getInt(cursor.getColumnIndex(db.COLUMN_UID));
+                                i.putExtra("key_email", user);
                                 startActivity(i);
                                 Toast.makeText(getApplicationContext(), "Register successfully", Toast.LENGTH_SHORT).show();
 

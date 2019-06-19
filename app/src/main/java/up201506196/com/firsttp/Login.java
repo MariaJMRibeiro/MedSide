@@ -1,6 +1,8 @@
 package up201506196.com.firsttp;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ public class Login extends AppCompatActivity {
     Button b1;
     TextView t1;
     DatabaseHelper db;
+    SQLiteDatabase sqLiteDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +34,13 @@ public class Login extends AppCompatActivity {
                 String password = e2.getText().toString();
                 Boolean Chkemailpass = db.emailpassword(email,password);
                 if (Chkemailpass==true) {
+
+                    sqLiteDatabase = db.getReadableDatabase();
+                    Cursor cursor = sqLiteDatabase.rawQuery("SELECT  * FROM"+ db.TABLE_USER +" user where "+ db.COLUMN_UEMAIL +"=?", new String[]{email});
+                    int user =cursor.getInt(cursor.getColumnIndex(db.COLUMN_UID));
                     Intent i= new Intent(Login.this,InitialPage.class);
-                    i.putExtra("key_email", email);
+                    i.putExtra("key_email", user);
+
                     startActivity(i);
                     Toast.makeText(getApplicationContext(), "Successfully Login ", Toast.LENGTH_SHORT).show();
                 }

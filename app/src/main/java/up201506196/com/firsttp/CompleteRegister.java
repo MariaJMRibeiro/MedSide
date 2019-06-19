@@ -18,8 +18,8 @@ public class CompleteRegister extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int user = getIntent().getIntExtra("key_email",1);
                 Intent i= new Intent(CompleteRegister.this,InitialPage.class);
-                String user = getIntent().getExtras().getString("key_email");
                 i.putExtra("key_email", user);
                 startActivity(i);
             }

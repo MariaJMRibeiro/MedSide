@@ -17,7 +17,6 @@ public class Login extends AppCompatActivity {
     Button b1;
     TextView t1;
     DatabaseHelper db;
-    SQLiteDatabase sqLiteDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +31,27 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String email = e1.getText().toString();
                 String password = e2.getText().toString();
-                Boolean Chkemailpass = db.emailpassword(email,password);
-                if (Chkemailpass==true) {
-
-                    sqLiteDatabase = db.getReadableDatabase();
-                    Cursor cursor = sqLiteDatabase.rawQuery("SELECT  * FROM"+ db.TABLE_USER +" user where "+ db.COLUMN_UEMAIL +"=?", new String[]{email});
-                    int user =cursor.getInt(cursor.getColumnIndex(db.COLUMN_UID));
-                    Intent i= new Intent(Login.this,InitialPage.class);
-                    i.putExtra("key_email", user);
-
-                    startActivity(i);
-                    Toast.makeText(getApplicationContext(), "Successfully Login ", Toast.LENGTH_SHORT).show();
+                if (email.equals("") || password.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Fields are empty ", Toast.LENGTH_SHORT).show();
                 }
-                else
-                    Toast.makeText(getApplicationContext(), "Email or Password incorrect ", Toast.LENGTH_SHORT).show();
+                else {
+                    Boolean Chkemail = db.chkemail(email);
+                    if (!Chkemail) {
+                        Boolean Chkemailpass = db.emailpassword(email,password);
+                            if (Chkemailpass) {
+                                int user=db.getUserId(email);
+                                Intent i = new Intent(Login.this, InitialPage.class);
+                                i.putExtra("key_email", user);
+
+                                startActivity(i);
+                                Toast.makeText(getApplicationContext(), "Successfully Login ", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                                Toast.makeText(getApplicationContext(), "Password Incorrect ", Toast.LENGTH_SHORT).show();
+
+                    } else
+                        Toast.makeText(getApplicationContext(), "Email not exists ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         t1=(TextView) findViewById(R.id.NRegister);

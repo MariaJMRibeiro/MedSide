@@ -14,15 +14,17 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
 public class CompleteRegister extends AppCompatActivity {
-
+    DatabaseHelper db;
     Button b1;
     EditText e1,e2,e3,e4;
-    String name,gender,s3,s4;
-    DatabaseHelper db;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,31 +39,43 @@ public class CompleteRegister extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int user = getIntent().getIntExtra("key_email",1);
-                name=e1.getText().toString();
-                gender=e2.getText().toString();
-                s3=e3.getText().toString();
-                int height=Integer.parseInt(s3);
-                String date="0";
-                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // Make sure user insert date into edittext in this format.
-                Date dateObject;
+                String name=e1.getText().toString();
+                String gender=e2.getText().toString();
+                String s3=e3.getText().toString();
+                String s4=e4.getText().toString();
 
-                try{
-                    s4=e4.getText().toString();
-                    dateObject = formatter.parse(s4);
+                if (name.equals("")||gender.equals("")||s3.equals("")||s4.equals(""))
+                    Toast.makeText(getApplicationContext(), "Fields are empty", Toast.LENGTH_SHORT).show();
+                else {
+                    if (gender.equals("F")||gender.equals("M")){
+                        int height=Integer.parseInt(s3);
+                        if (height>120 && height<230) {
+                            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // Make sure user insert date into edittext in this format.
+                            Date dateObject;
 
-                   date = new SimpleDateFormat("yyyy-MM-dd").format(dateObject);
+                            try{
+                                dateObject = formatter.parse(s4);
+                                String date = new SimpleDateFormat("yyyy-MM-dd").format(dateObject);
+                                db.CompleteRegistration(user, name, gender, height, date);
+                                Intent i= new Intent(CompleteRegister.this,InitialPage.class);
+                                i.putExtra("key_email", user);
+                                startActivity(i);
+                            }
+                            catch (java.text.ParseException e)
+                            {
+                                // TODO Auto-generated catch block
+                                Toast.makeText(getApplicationContext(), "Please field a valid Birthdate (YYYY-MM-DD)", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                        else
+                            Toast.makeText(getApplicationContext(), "Height should be between 120 and 230 cm", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                        Toast.makeText(getApplicationContext(), "Invalid Gender (F or M)", Toast.LENGTH_SHORT).show();
+
                 }
 
-                catch (java.text.ParseException e)
-                {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    Log.i("", e.toString());
-                }
-                db.CompleteRegistration(user,name,gender,height,date);
-                Intent i= new Intent(CompleteRegister.this,InitialPage.class);
-                i.putExtra("key_email", user);
-                startActivity(i);
             }
         });
 

@@ -158,6 +158,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public int getUserId(String email){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+COLUMN_UEMAIL+"=?", new String[]{email});
+        cursor.moveToLast();
+        return cursor.getInt(cursor.getColumnIndex(COLUMN_UID));
+    }
+
 
     //inserting in database
     public void CompleteRegistration(int id, String name, String gender,int height, String birthdate ){
@@ -178,6 +185,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     // Medication handling
+    public boolean chkmed(String med, int user){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_MEDICATION+" where "+COLUMN_MNAME+"=? and " +COLUMN_MUSER+"=?", new String[]{med,String.valueOf(user)});
+        if (cursor.getCount()>0) return true;
+        else return false;
+    }
     public void addMedication(Medication medication) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -199,6 +212,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // delete raw
         db.delete(TABLE_MEDICATION, COLUMN_MNAME + "=? and " + COLUMN_MUSER + "=?", new String[]{name,String.valueOf(user)});
+    }
+    public void updateMedication(Medication medication){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        String name=medication.getName();
+        int user=medication.getUser();
+
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_MEDICATION+" where "+COLUMN_MUSER+ "=? and " +COLUMN_MNAME+ "=?", new String[]{String.valueOf(user),name});
+        cursor.moveToLast();
+        int last_quantity= cursor.getInt(cursor.getColumnIndex(COLUMN_MQUANTITY));
+        int new_quantity= last_quantity+medication.getQuantity();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_MQUANTITY, new_quantity);
+
+        db.update(TABLE_MEDICATION,  contentValues, COLUMN_MNAME + "=? and " + COLUMN_MUSER + "=?", new String[]{name,String.valueOf(user)});
+
+        // close db connection
+        db.close();
+    }
+
+    public boolean deleteQuantityMedication(Medication medication) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String name=medication.getName();
+        int user=medication.getUser();
+
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_MEDICATION+" where "+COLUMN_MUSER+ "=? and " +COLUMN_MNAME+ "=?", new String[]{String.valueOf(user),name});
+        cursor.moveToLast();
+        int last_quantity= cursor.getInt(cursor.getColumnIndex(COLUMN_MQUANTITY));
+        if (last_quantity<=medication.getQuantity()){
+            db.close();
+            return false;
+        }
+        else{
+            int new_quantity=last_quantity-medication.getQuantity();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COLUMN_MQUANTITY, new_quantity);
+            db.update(TABLE_MEDICATION,  contentValues, COLUMN_MNAME + "=? and " + COLUMN_MUSER + "=?", new String[]{name,String.valueOf(user)});
+            return true;
+
+        }
     }
 
     //Register Regist handling

@@ -1,5 +1,6 @@
 package up201506196.com.firsttp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,8 +28,11 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class frag2 extends Fragment {
@@ -38,6 +43,9 @@ public class frag2 extends Fragment {
     SQLiteDatabase sqLiteDatabase;
     String date;
     private Spinner mSpinner;
+    ArrayList<String> this_weight;
+    ArrayList<String> this_date;
+    MedListAdapter listAdapter ;
 
     public frag2() {
         // Required empty public constructor
@@ -412,6 +420,7 @@ public class frag2 extends Fragment {
                         bmi_4.setVisibility(View.GONE);
                         bmi_5.setVisibility(View.GONE);
 
+                        final String typew="weight";
                         b4=view.findViewById(R.id.submit_button_bmi);
                         b4.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -423,6 +432,8 @@ public class frag2 extends Fragment {
                                 }
                                 else{
                                     int i1=Integer.parseInt(s1);
+                                    Record regist = new Record(i1, user, typew);
+                                    db.addRecord(regist);
                                     results.setVisibility(View.VISIBLE);
                                     String text;
                                     double IMC=i1/(1.65*1.65);
@@ -481,18 +492,48 @@ public class frag2 extends Fragment {
                                 }
                             }
                         });
+                        b8=view.findViewById(R.id.show_weights);
+                        b8.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                                LayoutInflater inflater = getLayoutInflater();
+                                View convertView = (View) inflater.inflate(R.layout.list_weight, null);
+                                alertDialog.setView(convertView);
+                                ListView lv = (ListView) convertView.findViewById(R.id.list_weight);
+
+                                this_weight = new ArrayList<String>();
+                                this_date = new ArrayList<String>();
+
+                                Cursor weight_cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_RECORD + " WHERE " + db.COLUMN_RUSER + " = ? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{String.valueOf(user),typew});
+
+                                this_date.clear();
+                                this_weight.clear();
+
+                                if (weight_cursor.moveToFirst()) {
+                                    do {
+
+                                        this_date.add(getDateFromatedString(weight_cursor.getString(weight_cursor.getColumnIndex(db.COLUMN_RDATE))));
+
+                                        this_weight.add(weight_cursor.getString(weight_cursor.getColumnIndex(db.COLUMN_RVALUE)));
 
 
 
+                                    } while (weight_cursor.moveToNext());
+                                }
 
+                                listAdapter = new MedListAdapter(getActivity(),
+                                        this_date,
+                                        this_weight
+                                );
 
+                                lv.setAdapter(listAdapter);
+                                weight_cursor.close();
 
-
-
-
-
-
-
+                                alertDialog.show();
+                            }
+                        });
                         break;
                     }
                 }
@@ -505,6 +546,26 @@ public class frag2 extends Fragment {
         });
 
 
+    }
+
+
+    public static String getDateFromatedString(String inputDate) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(inputDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (date == null) {
+            return "";
+        }
+
+        SimpleDateFormat convetDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        return convetDateFormat.format(date);
     }
 }
 

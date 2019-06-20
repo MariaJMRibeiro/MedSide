@@ -420,7 +420,51 @@ public class frag2 extends Fragment {
                         bmi_4.setVisibility(View.GONE);
                         bmi_5.setVisibility(View.GONE);
 
-                        final String typew="weight";
+
+                        b8=view.findViewById(R.id.show_weights);
+                        b8.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                                LayoutInflater inflater = getLayoutInflater();
+                                View convertView = (View) inflater.inflate(R.layout.list_weight, null);
+                                alertDialog.setView(convertView);
+                                ListView lv = (ListView) convertView.findViewById(R.id.list_weight);
+
+                                this_weight = new ArrayList<String>();
+                                this_date = new ArrayList<String>();
+
+                                String typew="weight";
+                                Cursor weight_cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_RECORD + " WHERE " + db.COLUMN_RUSER + " = ? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{String.valueOf(user),typew});
+
+                                this_date.clear();
+                                this_weight.clear();
+
+                                if (weight_cursor.moveToFirst()) {
+                                    do {
+
+                                        this_date.add(getDateFromatedString(weight_cursor.getString(weight_cursor.getColumnIndex(db.COLUMN_RDATE))));
+
+                                        this_weight.add(weight_cursor.getString(weight_cursor.getColumnIndex(db.COLUMN_RVALUE)));
+
+
+
+                                    } while (weight_cursor.moveToNext());
+                                }
+
+                                listAdapter = new MedListAdapter(getActivity(),
+                                        this_date,
+                                        this_weight
+                                );
+
+                                lv.setAdapter(listAdapter);
+                                weight_cursor.close();
+
+                                alertDialog.show();
+                            }
+                        });
+
                         b4=view.findViewById(R.id.submit_button_bmi);
                         b4.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -432,8 +476,9 @@ public class frag2 extends Fragment {
                                 }
                                 else{
                                     int i1=Integer.parseInt(s1);
-                                    Record regist = new Record(i1, user, typew);
-                                    db.addRecord(regist);
+                                    String typew="weight";
+                                    Record record = new Record(i1, user, typew);
+                                    db.addRecord(record);
                                     results.setVisibility(View.VISIBLE);
                                     String text;
                                     double IMC=i1/(1.65*1.65);
@@ -490,48 +535,6 @@ public class frag2 extends Fragment {
                                     results.setText(text);
 
                                 }
-                            }
-                        });
-                        b8=view.findViewById(R.id.show_weights);
-                        b8.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                                LayoutInflater inflater = getLayoutInflater();
-                                View convertView = (View) inflater.inflate(R.layout.list_weight, null);
-                                alertDialog.setView(convertView);
-                                ListView lv = (ListView) convertView.findViewById(R.id.list_weight);
-
-                                this_weight = new ArrayList<String>();
-                                this_date = new ArrayList<String>();
-
-                                Cursor weight_cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_RECORD + " WHERE " + db.COLUMN_RUSER + " = ? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{String.valueOf(user),typew});
-
-                                this_date.clear();
-                                this_weight.clear();
-
-                                if (weight_cursor.moveToFirst()) {
-                                    do {
-
-                                        this_date.add(getDateFromatedString(weight_cursor.getString(weight_cursor.getColumnIndex(db.COLUMN_RDATE))));
-
-                                        this_weight.add(weight_cursor.getString(weight_cursor.getColumnIndex(db.COLUMN_RVALUE)));
-
-
-
-                                    } while (weight_cursor.moveToNext());
-                                }
-
-                                listAdapter = new MedListAdapter(getActivity(),
-                                        this_date,
-                                        this_weight
-                                );
-
-                                lv.setAdapter(listAdapter);
-                                weight_cursor.close();
-
-                                alertDialog.show();
                             }
                         });
                         break;

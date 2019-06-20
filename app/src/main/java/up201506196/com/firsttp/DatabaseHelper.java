@@ -268,8 +268,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // insert row
         db.insert(TABLE_RECORD, null, values);
 
-        // close db connection
-        db.close();
     }
     public void deleteRecord(String type, int user){
 

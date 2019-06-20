@@ -231,7 +231,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // close db connection
         db.close();
     }
-
     public boolean deleteQuantityMedication(Medication medication) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -256,7 +255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    //Register Regist handling
+    //Record handling
     public void addRecord(Record record) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -272,6 +271,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // close db connection
         db.close();
     }
+    public void deleteRecord(String type, int user){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // delete raw
+        db.delete(TABLE_RECORD, COLUMN_RTYPE + "=? and " + COLUMN_RUSER + "=?", new String[]{type,String.valueOf(user)});
+    }
+
 
     public void addApp(App app){
         SQLiteDatabase db = this.getWritableDatabase();

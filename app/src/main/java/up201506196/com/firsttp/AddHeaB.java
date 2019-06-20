@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddHeaB extends AppCompatActivity {
 
@@ -25,15 +26,20 @@ public class AddHeaB extends AppCompatActivity {
             public void onClick(View v) {
                 int user = getIntent().getIntExtra("key_email",1);
                 String val = e1.getText().toString();
-                int value = Integer.parseInt(val);
-                String type= "heart_beat";
-                Record regist =
-                        new  Record(value,user,type);
-                db.addRecord(regist);
-                Intent i= new Intent(AddHeaB.this, InitialPage.class);
-                i.putExtra("key_email", user);
-                i.putExtra("toOpen", 1);
-                startActivity(i);
+                if (val.equals(""))
+                    Toast.makeText(getApplicationContext(), "Please enter a value", Toast.LENGTH_SHORT).show();
+                else {
+                    int value = Integer.parseInt(val);
+                    String type = "heart_beat";
+                    Record regist =
+                            new Record(value, user, type);
+                    db.addRecord(regist);
+                    Intent i = new Intent(AddHeaB.this, InitialPage.class);
+                    i.putExtra("key_email", user);
+                    i.putExtra("toOpen", 1);
+                    i.putExtra("toGraph", 1);
+                    startActivity(i);
+                }
             }
         });
 

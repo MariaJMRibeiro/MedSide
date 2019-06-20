@@ -44,6 +44,7 @@ public class AddBP extends AppCompatActivity {
                     Intent i = new Intent(AddBP.this, InitialPage.class);
                     i.putExtra("key_email", user);
                     i.putExtra("toOpen", 1);
+                    i.putExtra("toGraph", 2);
                     startActivity(i);
                 }
             }

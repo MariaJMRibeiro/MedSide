@@ -30,7 +30,7 @@ public class Add_Medication extends AppCompatActivity {
                 String name = e1.getText().toString();
                 String no = e2.getText().toString();
                 if (name.equals("")||no.equals(""))
-                    Toast.makeText(getApplicationContext(), "Fiels are empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Fields are empty", Toast.LENGTH_SHORT).show();
                 else {
                     int user = getIntent().getIntExtra("key_email", 1);
                     boolean chkmed = db.chkmed(name,user);

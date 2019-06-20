@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Add_Medication extends AppCompatActivity {
 
@@ -28,14 +29,25 @@ public class Add_Medication extends AppCompatActivity {
             public void onClick(View v) {
                 String name = e1.getText().toString();
                 String no = e2.getText().toString();
-                int quantity = Integer.parseInt(no);
-                int user = getIntent().getIntExtra("key_email",1);
-                Medication medication =
-                        new Medication(name, quantity, user);
-                db.addMedication(medication);
-                Intent i= new Intent(Add_Medication.this,InitialPage.class);
-                i.putExtra("key_email", user);
-                startActivity(i);
+                if (name.equals("")||no.equals(""))
+                    Toast.makeText(getApplicationContext(), "Fiels are empty", Toast.LENGTH_SHORT).show();
+                else {
+                    int user = getIntent().getIntExtra("key_email", 1);
+                    boolean chkmed = db.chkmed(name,user);
+                    int quantity = Integer.parseInt(no);
+                    Medication medication =
+                            new Medication(name, quantity, user);
+                    if (!chkmed) {
+                        db.addMedication(medication);
+                        Toast.makeText(getApplicationContext(), "New Medication Added", Toast.LENGTH_SHORT).show();
+                    } else {
+                        db.updateMedication(medication);
+                        Toast.makeText(getApplicationContext(), name+" quantity Updated", Toast.LENGTH_SHORT).show();
+                    }
+                    Intent i = new Intent(Add_Medication.this, InitialPage.class);
+                    i.putExtra("key_email", user);
+                    startActivity(i);
+                }
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {

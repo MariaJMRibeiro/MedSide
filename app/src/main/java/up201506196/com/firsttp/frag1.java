@@ -9,10 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.database.Cursor;
-
 import java.util.ArrayList;
 
 

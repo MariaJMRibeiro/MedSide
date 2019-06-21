@@ -9,6 +9,7 @@
         android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:ems="10"
         android:hint="@string/medication_name"
         android:singleLine="true" />
@@ -18,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="250dp"
+        android:layout_marginLeft="250dp"
         android:hint="@string/medication_quantity"
         android:inputType="number"
         android:singleLine="true" />

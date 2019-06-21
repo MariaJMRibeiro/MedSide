@@ -24,7 +24,7 @@ public class AddCho extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int user = getIntent().getIntExtra("key_email",1);
+                int user = getIntent().getIntExtra("key_email",0);
                 String val = e1.getText().toString();
                 if (val.equals(""))
                     Toast.makeText(getApplicationContext(), "Please enter a value", Toast.LENGTH_SHORT).show();

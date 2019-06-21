@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_marginBottom="20dp"
-        android:inputType="textWebEmailAddress"
+        android:inputType="textEmailAddress"
         android:hint="@string/doctor_s_email"
         android:singleLine="true"
         android:layout_gravity="center"/>

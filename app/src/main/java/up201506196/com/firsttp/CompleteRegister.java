@@ -38,7 +38,7 @@ public class CompleteRegister extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int user = getIntent().getIntExtra("key_email",1);
+                int user = getIntent().getIntExtra("key_email",0);
                 String name=e1.getText().toString();
                 String gender=e2.getText().toString();
                 String s3=e3.getText().toString();

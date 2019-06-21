@@ -22,7 +22,7 @@ public class DoctorComunication extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_comunication);
 
-        user=getIntent().getIntExtra("key_email",1);
+        user=getIntent().getIntExtra("key_email",0);
         e1 = (EditText)findViewById(R.id.Doctor_Email);
         doctor_email=e1.getText().toString();
         send = (Button)findViewById(R.id.bsend_email);

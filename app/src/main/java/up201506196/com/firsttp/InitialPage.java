@@ -63,13 +63,13 @@ public class InitialPage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.action_settings2:
-                int user = getIntent().getIntExtra("key_email",1);
+            case R.id.action_settings:
+                int user = getIntent().getIntExtra("key_email",0);
                 Intent intent2 = new Intent(this, Settings.class);
-                intent2.putExtra("key email",user);
+                intent2.putExtra("key_email",user);
                 this.startActivity(intent2);
                 break;
-            case R.id.action_settings3:
+            case R.id.action_logout:
                 Intent intent3 = new Intent(this, Login.class);
                 this.startActivity(intent3);
                 Toast.makeText(getApplicationContext(), "Logout successfully", Toast.LENGTH_SHORT).show();

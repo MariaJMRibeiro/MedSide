@@ -49,7 +49,7 @@ public class frag1 extends Fragment {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int user = getActivity().getIntent().getIntExtra("key_email",1);
+                int user = getActivity().getIntent().getIntExtra("key_email",0);
                 Intent i= new Intent(getActivity(),Add_Medication.class);
                 i.putExtra("key_email", user);
                 startActivity(i);
@@ -60,7 +60,7 @@ public class frag1 extends Fragment {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int user = getActivity().getIntent().getIntExtra("key_email",1);
+                int user = getActivity().getIntent().getIntExtra("key_email",0);
                 Intent i= new Intent(getActivity(),Delete_Medication.class);
                 i.putExtra("key_email", user);
                 startActivity(i);
@@ -85,7 +85,7 @@ public class frag1 extends Fragment {
 
     private void ShowSQLiteDBdata() {
 
-        int user = getActivity().getIntent().getIntExtra("key_email",1);
+        int user = getActivity().getIntent().getIntExtra("key_email",0);
         sqLiteDatabase = sqLiteHelper.getWritableDatabase();
 
         cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+sqLiteHelper.TABLE_MEDICATION + " WHERE " + sqLiteHelper.COLUMN_MUSER + " = ? " ,new String[] {String.valueOf(user)});

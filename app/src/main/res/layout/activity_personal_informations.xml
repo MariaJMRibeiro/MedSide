@@ -5,11 +5,13 @@
     android:layout_height="wrap_content"
     tools:context=".PersonalInformations"
     android:layout_marginTop="50dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/n_email"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -20,42 +22,42 @@
         android:singleLine="true" />
 
     <EditText
-        android:id="@+id/Gender"
+        android:id="@+id/n_gender"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_marginBottom="10dp"
-        android:inputType="text"
+        android:inputType="textShortMessage"
         android:hint="@string/gender"
         android:singleLine="true"
         android:layout_gravity="center"/>
 
     <EditText
-        android:id="@+id/height"
+        android:id="@+id/n_height"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_marginBottom="10dp"
-        android:inputType="numberDecimal"
+        android:inputType="number"
         android:hint="@string/height"
         android:singleLine="true"
         android:layout_gravity="center"/>
 
     <EditText
-        android:id="@+id/age"
+        android:id="@+id/n_birthdate"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_marginBottom="10dp"
         android:inputType="date"
-        android:hint="Birth date"
+        android:hint="@string/birthdate"
         android:singleLine="true"
         android:layout_gravity="center"/>
 
 
 
     <Button
-        android:id="@+id/submit_button"
+        android:id="@+id/submit_pchange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/common_google_signin_btn_text_dark_pressed"

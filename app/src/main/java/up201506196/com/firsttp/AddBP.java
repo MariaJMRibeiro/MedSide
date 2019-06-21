@@ -25,7 +25,7 @@ public class AddBP extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int user = getIntent().getIntExtra("key_email",1);
+                int user = getIntent().getIntExtra("key_email",0);
                 String val1 = e1.getText().toString();
                 String val2 = e2.getText().toString();
                 if (val1.equals("") || val2.equals("")) {

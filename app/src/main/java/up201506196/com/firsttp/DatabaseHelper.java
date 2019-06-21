@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.jjoe64.graphview.series.DataPoint;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -75,10 +78,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_MEDICATION_TABLE = "CREATE TABLE " +
                 TABLE_MEDICATION + "("
                 + COLUMN_MID + " integer primary key autoincrement,"
-                + COLUMN_MNAME + " TEXT unique,"
+                + COLUMN_MNAME + " TEXT,"
                 + COLUMN_MQUANTITY + " INTEGER,"
                 + COLUMN_MUSER + " INTEGER,"
-                + " FOREIGN KEY ("+COLUMN_MUSER+") REFERENCES "+ TABLE_USER +"("+ COLUMN_UID +"));";
+                + " FOREIGN KEY ("+COLUMN_MUSER+") REFERENCES "+ TABLE_USER +"("+ COLUMN_UID +")"+"ON DELETE CASCADE);";
         db.execSQL(CREATE_MEDICATION_TABLE);
 
         String CREATE_RECORD_TABLE = "CREATE TABLE " +
@@ -88,7 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_RVALUE + " INTEGER,"
                 + COLUMN_RDATE + " DATETIME DEFAULT CURRENT_TIMESTAMP,"
                 + COLUMN_RUSER + " INTEGER,"
-                + " FOREIGN KEY ("+COLUMN_RUSER+") REFERENCES "+TABLE_USER+"("+COLUMN_UID+"));";
+                + " FOREIGN KEY ("+COLUMN_RUSER+") REFERENCES "+TABLE_USER+"("+COLUMN_UID+")"+"ON DELETE CASCADE);";
         db.execSQL(CREATE_RECORD_TABLE);
 
         String CREATE_APP_TABLE = "CREATE TABLE " +
@@ -98,7 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_ADESCRIPTION + " TEXT,"
                 + COLUMN_ADATE + " DATE,"
                 + COLUMN_AUSER + " INTEGER,"
-                + " FOREIGN KEY ("+COLUMN_MUSER+") REFERENCES "+TABLE_USER+"("+COLUMN_UID+"));";
+                + " FOREIGN KEY ("+COLUMN_MUSER+") REFERENCES "+TABLE_USER+"("+COLUMN_UID+")"+"ON DELETE CASCADE);";
         db.execSQL(CREATE_APP_TABLE);
 
         String CREATE_LOC_TABLE = "CREATE TABLE " +
@@ -112,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    @Override // here I am trying to enable the foreign keys
+    @Override //enable the foreign keys
     public void onOpen(SQLiteDatabase db) {
         db.execSQL("PRAGMA foreign_keys=ON");
     }
@@ -129,7 +132,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // User handling
-    //inserting in database
     public boolean insert(String email, String password){
         SQLiteDatabase db=this.getWritableDatabase();
 
@@ -140,8 +142,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(ins==-1) return false;
         else return true;
     }
-
-    // check if email exists
     public boolean chkemail(String email){
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+COLUMN_UEMAIL+"=?", new String[]{email});
@@ -156,8 +156,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (true_pass.equals(pass)) return true;
         else return false;
     }
-
-    //check email and password
     public boolean emailpassword(String email, String password){
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+ COLUMN_UEMAIL +"=? and "+COLUMN_UPASSWORD+"=?", new String[]{email,password});
@@ -165,22 +163,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else return false;
 
     }
-
     public int getUserId(String email){
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+COLUMN_UEMAIL+"=?", new String[]{email});
         cursor.moveToLast();
         return cursor.getInt(cursor.getColumnIndex(COLUMN_UID));
     }
-
     public int getHeight(int user){
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+COLUMN_UID+"=?", new String[]{String.valueOf(user)});
         cursor.moveToLast();
         return cursor.getInt(cursor.getColumnIndex(COLUMN_UHEIGHT));
     }
-
-
     public void CompleteRegistration(int id, String name, String gender,int height, String birthdate ){
         SQLiteDatabase db=this.getWritableDatabase();
 
@@ -193,10 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.update(TABLE_USER,  contentValues, COLUMN_UID+"=?", new String[]{String.valueOf(id)});
 
-        // close db connection
-        db.close();
     }
-
     public void changepass(String pass, int user){
         SQLiteDatabase db=this.getWritableDatabase();
 
@@ -205,8 +196,92 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.update(TABLE_USER,  contentValues, COLUMN_UID+"=?", new String[]{String.valueOf(user)});
 
-        // close db connection
-        db.close();
+    }
+    public ArrayList<String> getPInformation(int user){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+COLUMN_UID+"=?", new String[]{String.valueOf(user)});
+        cursor.moveToLast();
+        ArrayList array_list = new ArrayList();
+        array_list.add(cursor.getString(cursor.getColumnIndex(COLUMN_UEMAIL)));
+        array_list.add(cursor.getString(cursor.getColumnIndex(COLUMN_UGENDER)));
+        array_list.add(cursor.getString(cursor.getColumnIndex(COLUMN_UHEIGHT)));
+        array_list.add(cursor.getString(cursor.getColumnIndex(COLUMN_UDATE)));
+
+        return array_list;
+    }
+    public boolean chkotheremail(String email,int user){
+        SQLiteDatabase db=this.getReadableDatabase();
+        String comp_email="DEACTIVATE "+email;
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+COLUMN_UEMAIL+"=? AND "+COLUMN_UID+ "!=?", new String[]{email,String.valueOf(user)});
+        Cursor cursor2 =db.rawQuery("Select * from "+TABLE_USER+" where "+COLUMN_UEMAIL+"=?", new String[]{comp_email});
+        if (cursor.getCount()>0 || cursor2.getCount()>0) return false;
+        else return true;
+    }
+    public void ChangePersonal(int user, String email, String gender, int height,String birthdate ){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_UEMAIL, email);
+        boolean real_gender = gender.equals("F");
+        contentValues.put(COLUMN_UGENDER, real_gender);
+        contentValues.put(COLUMN_UHEIGHT, height);
+        contentValues.put(COLUMN_UDATE, birthdate);
+
+        db.update(TABLE_USER,  contentValues, COLUMN_UID+"=?", new String[]{String.valueOf(user)});
+
+    }
+    public boolean useremailpassword(int user,String email, String password){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+ COLUMN_UEMAIL +"=? and "+COLUMN_UPASSWORD+"=? and "+COLUMN_UID+"=?", new String[]{email,password, String.valueOf(user)});
+        if (cursor.getCount()>0) return true;
+        else return false;
+
+    }
+    public void DeleteUser(int user, String email, boolean save){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        if (save) {
+            db.delete(TABLE_USER, COLUMN_UID + "=? ", new String[]{String.valueOf(user)});
+        }else{
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COLUMN_UEMAIL, "DEACTIVATE "+email);
+            db.update(TABLE_USER, contentValues, COLUMN_UID + "=?", new String[]{String.valueOf(user)});
+        }
+    }
+    public boolean dectivateAccount(String email){
+        SQLiteDatabase db=this.getReadableDatabase();
+        String dea_email;
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_USER, null);
+        if (cursor.moveToFirst()) {
+            do {
+                dea_email=cursor.getString(cursor.getColumnIndex(COLUMN_UEMAIL));
+                if (dea_email.equals("DEACTIVATE "+email))
+                    return true;
+            } while (cursor.moveToNext());
+        }
+        return false;
+    }
+    public boolean chkDeativatePass(String email,String pass){
+        SQLiteDatabase db=this.getReadableDatabase();
+        String dea_email;
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+ " where "+ COLUMN_UPASSWORD+"=?", new String[]{pass});
+        if (cursor.moveToFirst()) {
+            do {
+                dea_email=cursor.getString(cursor.getColumnIndex(COLUMN_UEMAIL));
+                if (dea_email.equals("DEACTIVATE "+email))
+                    return true;
+            } while (cursor.moveToNext());
+        }
+        return false;
+    }
+    public void activateAccount(String email){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_UEMAIL, email);
+
+        db.update(TABLE_USER,  contentValues, COLUMN_UEMAIL+"=?", new String[]{"DEACTIVATE "+email});
+
     }
 
     // Medication handling
@@ -228,8 +303,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // insert row
         db.insert(TABLE_MEDICATION, null, values);
 
-        // close db connection
-        db.close();
     }
     public void deleteMedication(String name, int user){
 
@@ -253,8 +326,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.update(TABLE_MEDICATION,  contentValues, COLUMN_MNAME + "=? and " + COLUMN_MUSER + "=?", new String[]{name,String.valueOf(user)});
 
-        // close db connection
-        db.close();
     }
     public boolean deleteQuantityMedication(Medication medication) {
 
@@ -267,7 +338,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.moveToLast();
         int last_quantity= cursor.getInt(cursor.getColumnIndex(COLUMN_MQUANTITY));
         if (last_quantity<=medication.getQuantity()){
-            db.close();
             return false;
         }
         else{
@@ -317,8 +387,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // insert row
         db.insert(TABLE_APP, null, values);
 
-        // close db connection
-        db.close();
 
     }
 

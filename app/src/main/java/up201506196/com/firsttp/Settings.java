@@ -35,32 +35,32 @@ public class Settings extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                int user = getIntent().getIntExtra("key_email",1);
+                int user = getIntent().getIntExtra("key_email",0);
 
                 if (position == 0) {
                     //code specific to first list item
                     Intent myIntent = new Intent(view.getContext(), ChangePassword.class);
-                    myIntent.putExtra("key email", user);
-                    startActivityForResult(myIntent, 0);
+                    myIntent.putExtra("key_email", user);
+                    startActivity(myIntent);
                 }
                 if (position == 1) {
                     //code specific to first list item
                     Intent myIntent = new Intent(view.getContext(),DoctorComunication.class);
-                    myIntent.putExtra("key email", user);
-                    startActivityForResult(myIntent, 0);
+                    myIntent.putExtra("key_email", user);
+                    startActivity(myIntent);
                 }
                 if (position == 2) {
                     //code specific to first list item
                     Intent myIntent = new Intent(view.getContext(), PersonalInformations.class);
-                    myIntent.putExtra("key email", user);
-                    startActivityForResult(myIntent, 0);
+                    myIntent.putExtra("key_email", user);
+                    startActivity(myIntent);;
                 }
 
                 if (position == 3) {
                     //code specific to first list item
                     Intent myIntent = new Intent(view.getContext(), DeactivateAccount.class);
-                    myIntent.putExtra("key email", user);
-                    startActivityForResult(myIntent, 0);
+                    myIntent.putExtra("key_email", user);
+                    startActivity(myIntent);
                 }
 
             }

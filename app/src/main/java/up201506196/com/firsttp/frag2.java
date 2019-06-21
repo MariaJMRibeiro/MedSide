@@ -65,7 +65,7 @@ public class frag2 extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 
         mSpinner = (Spinner) view.findViewById(R.id.layout_spinner);
-        String[] regists = new String[]{
+        String[] records = new String[]{
                 "Cholesterol (LDL)",
                 "Heart Rate",
                 "Blood Pressure",
@@ -74,7 +74,7 @@ public class frag2 extends Fragment {
         db = new DatabaseHelper(getActivity());
         sqLiteDatabase = db.getReadableDatabase();
 
-        final List<String> RecordsList = new ArrayList<>(Arrays.asList(regists));
+        final List<String> RecordsList = new ArrayList<>(Arrays.asList(records));
 
         // Initializing an ArrayAdapter
         final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
@@ -93,7 +93,7 @@ public class frag2 extends Fragment {
         final LinearLayout BloodPressure = (LinearLayout) view.findViewById(R.id.layout_blood_pressure);
         final LinearLayout Weight = (LinearLayout) view.findViewById(R.id.layout_weight);
 
-        final int user = getActivity().getIntent().getIntExtra("key_email",1);
+        final int user = getActivity().getIntent().getIntExtra("key_email",0);
 
 
         //region implements case 0

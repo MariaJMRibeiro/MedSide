@@ -26,7 +26,7 @@ public class Delete_Medication extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int user =getIntent().getIntExtra("key_email",1);
+                int user =getIntent().getIntExtra("key_email",0);
                 String name = e1.getText().toString();
                 boolean chkmed=db.chkmed(name,user);
                 if(!chkmed)
@@ -63,7 +63,7 @@ public class Delete_Medication extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int user = getIntent().getIntExtra("key_email",1);
+                int user = getIntent().getIntExtra("key_email",0);
                 Intent i= new Intent(Delete_Medication.this, InitialPage.class);
                 i.putExtra("key_email", user);
                 startActivity(i);

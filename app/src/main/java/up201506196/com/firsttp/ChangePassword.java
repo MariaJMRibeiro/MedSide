@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.regex.Pattern;
+
 public class ChangePassword extends AppCompatActivity {
 
     EditText e,e2,e3;
@@ -28,7 +30,7 @@ public class ChangePassword extends AppCompatActivity {
         change.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                int user = getIntent().getIntExtra("key_email",1);
+                int user = getIntent().getIntExtra("key_email",0);
                 actual=e.getText().toString();
                 new_p=e2.getText().toString();
                 confirm_p=e3.getText().toString();
@@ -38,28 +40,27 @@ public class ChangePassword extends AppCompatActivity {
                 else{
                     boolean chkpass= db.chkpass(actual,user);
                     if(chkpass){
-                        if(new_p.equals(confirm_p)){
-                            if(new_p.equals(actual)){
-                                Toast.makeText(getApplicationContext(), "Cannot change to equal Password", Toast.LENGTH_SHORT).show();
+                        if (isValidPassword(new_p)) {
+                            if (new_p.equals(confirm_p)) {
+                                if (new_p.equals(actual)) {
+                                    Toast.makeText(getApplicationContext(), "Cannot change to equal Password", Toast.LENGTH_SHORT).show();
+                                    e2.setText("");
+                                    e3.setText("");
+                                } else {
+                                    db.changepass(new_p, user);
+                                    Intent i = new Intent(ChangePassword.this, InitialPage.class);
+                                    i.putExtra("key_email", user);
+                                    startActivity(i);
+                                    Toast.makeText(getApplicationContext(), "Successfully Changed Password", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "New Passwords do not match", Toast.LENGTH_SHORT).show();
                                 e2.setText("");
                                 e3.setText("");
                             }
-                            else{
-                                db.changepass(new_p,user);
-                                Intent i = new Intent(ChangePassword.this, InitialPage.class);
-                                i.putExtra("key_email", user);
-                                startActivity(i);
-                                Toast.makeText(getApplicationContext(), "Successfully Changed Password", Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "New Passwords do not match", Toast.LENGTH_SHORT).show();
-                            e2.setText("");
-                            e3.setText("");
-                        }
-                    }
-                    else {
+                        }else
+                            Toast.makeText(getApplicationContext(), "Password must contain at least 6 characters UPPER/lowercase and number", Toast.LENGTH_SHORT).show();
+                    }else {
                         Toast.makeText(getApplicationContext(), "Current password incorrect", Toast.LENGTH_SHORT).show();
                         e.setText("");
                     }
@@ -68,4 +69,15 @@ public class ChangePassword extends AppCompatActivity {
         });
 
     }
+    public static boolean isValidPassword(String target) {
+        String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})";
+        Pattern patternpass = Pattern.compile(PASSWORD_PATTERN);
+
+        if (target == null) {
+            return false;
+        } else {
+            return patternpass.matcher(target).matches();
+        }
+    }
+
 }

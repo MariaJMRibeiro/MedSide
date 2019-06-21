@@ -48,7 +48,7 @@ public class frag3 extends Fragment {
     }
 
     public void onViewCreated(final View view, Bundle saveInstanceState){
-        final int user = getActivity().getIntent().getIntExtra("key_email",1);
+        final int user = getActivity().getIntent().getIntExtra("key_email",0);
         calender=(CalendarView)view.findViewById(R.id.calender);
         currentDate=(TextView)view.findViewById(R.id.current_date);
         b1=(Button)view.findViewById(R.id.add_appointment);

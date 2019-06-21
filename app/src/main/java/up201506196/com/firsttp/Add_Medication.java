@@ -32,7 +32,7 @@ public class Add_Medication extends AppCompatActivity {
                 if (name.equals("")||no.equals(""))
                     Toast.makeText(getApplicationContext(), "Fields are empty", Toast.LENGTH_SHORT).show();
                 else {
-                    int user = getIntent().getIntExtra("key_email", 1);
+                    int user = getIntent().getIntExtra("key_email", 0);
                     boolean chkmed = db.chkmed(name,user);
                     int quantity = Integer.parseInt(no);
                     Medication medication =
@@ -53,7 +53,7 @@ public class Add_Medication extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int user = getIntent().getIntExtra("key_email",1);
+                int user = getIntent().getIntExtra("key_email",0);
                 Intent i= new Intent(Add_Medication.this, InitialPage.class);
                 i.putExtra("key_email", user);
                 startActivity(i);

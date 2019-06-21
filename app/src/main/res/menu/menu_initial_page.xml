@@ -4,13 +4,13 @@
     tools:context="up201506196.com.firsttp.InitialPage">
 
     <item
-        android:id="@+id/action_settings2"
+        android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings2"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_settings3"
+        android:id="@+id/action_logout"
         android:orderInCategory="100"
         android:title="@string/action_settings3"
         app:showAsAction="never" />

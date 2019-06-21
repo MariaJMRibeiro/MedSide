@@ -34,7 +34,7 @@ public class Set_Appointment extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int user=getIntent().getIntExtra("key_email",1);
+                int user=getIntent().getIntExtra("key_email",0);
                 String adescription = description.getText().toString();
                 String atitle = title.getText().toString();
                 if (atitle.equals(""))

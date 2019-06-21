@@ -148,6 +148,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.getCount()>0) return false;
         else return true;
     }
+    public boolean chkpass(String pass, int user){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+COLUMN_UID+"=?", new String[]{String.valueOf(user)});
+        cursor.moveToLast();
+        String true_pass=cursor.getString(cursor.getColumnIndex(COLUMN_UPASSWORD));
+        if (true_pass.equals(pass)) return true;
+        else return false;
+    }
 
     //check email and password
     public boolean emailpassword(String email, String password){
@@ -172,7 +180,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor.getInt(cursor.getColumnIndex(COLUMN_UHEIGHT));
     }
 
-    //inserting in database
+
     public void CompleteRegistration(int id, String name, String gender,int height, String birthdate ){
         SQLiteDatabase db=this.getWritableDatabase();
 
@@ -189,6 +197,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void changepass(String pass, int user){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_UPASSWORD, pass);
+
+        db.update(TABLE_USER,  contentValues, COLUMN_UID+"=?", new String[]{String.valueOf(user)});
+
+        // close db connection
+        db.close();
+    }
 
     // Medication handling
     public boolean chkmed(String med, int user){
@@ -302,4 +321,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
     }
+
 }

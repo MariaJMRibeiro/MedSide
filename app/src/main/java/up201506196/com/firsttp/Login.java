@@ -42,7 +42,6 @@ public class Login extends AppCompatActivity {
                                 int user=db.getUserId(email);
                                 Intent i = new Intent(Login.this, InitialPage.class);
                                 i.putExtra("key_email", user);
-
                                 startActivity(i);
                                 Toast.makeText(getApplicationContext(), "Successfully Login ", Toast.LENGTH_SHORT).show();
                             }

@@ -10,12 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Set_Appointment extends AppCompatActivity {
 
 
     TextView date;
-    EditText description;
+    EditText title, description;
     Button b1;
     DatabaseHelper db;
 
@@ -26,6 +27,7 @@ public class Set_Appointment extends AppCompatActivity {
         final String add_date=getIntent().getStringExtra("date");
         date=findViewById(R.id.current_date);
         date.setText(add_date);
+        title=findViewById(R.id.appt_title);
         description=findViewById(R.id.app_description);
         b1=findViewById(R.id.add_appointment);
         db = new DatabaseHelper(this);
@@ -34,16 +36,18 @@ public class Set_Appointment extends AppCompatActivity {
             public void onClick(View v) {
                 int user=getIntent().getIntExtra("key_email",1);
                 String adescription = description.getText().toString();
-                App app =
-                        new App(adescription, add_date, user);
-                db.addApp(app);
-                Intent i= new Intent(Set_Appointment.this, InitialPage.class);
-                i.putExtra("key_email", user);
-                i.putExtra("toOpen", 2);
-                startActivity(i);
-
-
-
+                String atitle = title.getText().toString();
+                if (atitle.equals(""))
+                    Toast.makeText(getApplicationContext(), "Please fill Title", Toast.LENGTH_SHORT).show();
+                else {
+                    App app = new App(atitle,adescription, add_date, user);
+                    db.addApp(app);
+                    Intent i = new Intent(Set_Appointment.this, InitialPage.class);
+                    i.putExtra("key_email", user);
+                    i.putExtra("toOpen", 2);
+                    startActivity(i);
+                    Toast.makeText(getApplicationContext(), "Appointment set successfully", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

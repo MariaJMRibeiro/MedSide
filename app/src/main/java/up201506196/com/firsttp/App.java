@@ -14,13 +14,14 @@ public class App {
 
     }
 
-    public App(String description,String date, int user) {
+    public App(String title, String description,String date, int user) {
+        this.title = title;
         this.description = description;
         this.date = date;
         this.user= user;
     }
 
-    public void setTitle(String name) {
+    public void setTitle(String title) {
         this.title = title;
     }
 

@@ -445,12 +445,13 @@ public class frag2 extends Fragment {
                                     do {
 
                                         this_date.add(getDateFromatedString(weight_cursor.getString(weight_cursor.getColumnIndex(db.COLUMN_RDATE))));
-
                                         this_weight.add(weight_cursor.getString(weight_cursor.getColumnIndex(db.COLUMN_RVALUE)));
 
-
-
                                     } while (weight_cursor.moveToNext());
+                                }
+                                else{
+                                    TextView caution = convertView.findViewById(R.id.weight_caution);
+                                    caution.setVisibility(View.VISIBLE);
                                 }
 
                                 listAdapter = new MedListAdapter(getActivity(),
@@ -481,7 +482,9 @@ public class frag2 extends Fragment {
                                     db.addRecord(record);
                                     results.setVisibility(View.VISIBLE);
                                     String text;
-                                    double IMC=i1/(1.65*1.65);
+                                    int height=db.getHeight(user);
+                                    double mheight=(double) height/(double) 100;
+                                    double IMC=i1/(mheight*mheight);
                                     DecimalFormat df = new DecimalFormat("0.00");
                                     if (IMC<18.5) {
                                         text="Caution, your BMI is "+ df.format(IMC) +". You are Underweight.";

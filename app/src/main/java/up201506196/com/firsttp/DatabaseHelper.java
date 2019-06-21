@@ -165,6 +165,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor.getInt(cursor.getColumnIndex(COLUMN_UID));
     }
 
+    public int getHeight(int user){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+COLUMN_UID+"=?", new String[]{String.valueOf(user)});
+        cursor.moveToLast();
+        return cursor.getInt(cursor.getColumnIndex(COLUMN_UHEIGHT));
+    }
 
     //inserting in database
     public void CompleteRegistration(int id, String name, String gender,int height, String birthdate ){
@@ -278,6 +284,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    //Appointment Handling
     public void addApp(App app){
         SQLiteDatabase db = this.getWritableDatabase();
 

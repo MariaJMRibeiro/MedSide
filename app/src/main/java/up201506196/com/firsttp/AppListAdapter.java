@@ -8,22 +8,24 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class MedListAdapter extends BaseAdapter {
+public class AppListAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<String> name;
-    ArrayList<String> quantity;
+    ArrayList<String> title;
+    ArrayList<String> description;
+    ArrayList<String> date;
 
 
-    public MedListAdapter(Context context2, ArrayList<String> name, ArrayList<String> quantity) {
+    public AppListAdapter(Context context2, ArrayList<String> title, ArrayList<String> description, ArrayList<String> date) {
         this.context = context2;
-        this.name = name;
-        this.quantity = quantity;
+        this.title = title;
+        this.description = description;
+        this.date = date;
     }
 
     public int getCount() {
         // TODO Auto-generated method stub
-        return name.size();
+        return title.size();
     }
 
     public Object getItem(int position) {
@@ -45,12 +47,13 @@ public class MedListAdapter extends BaseAdapter {
         if (child == null) {
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            child = layoutInflater.inflate(R.layout.adapter_med, null);
+            child = layoutInflater.inflate(R.layout.activity_app_list_adapter, null);
 
             holder = new Holder();
 
-            holder.name_TextView = (TextView) child.findViewById(R.id.show_name);
-            holder.quantity_TextView = (TextView) child.findViewById(R.id.show_quantity);
+            holder.title_TextView= child.findViewById(R.id.show_title);
+            holder.description_TextView = child.findViewById(R.id.show_description);
+            holder.date_TextView = child.findViewById(R.id.show_date);
 
             child.setTag(holder);
 
@@ -58,16 +61,18 @@ public class MedListAdapter extends BaseAdapter {
 
             holder = (Holder) child.getTag();
         }
-        holder.name_TextView.setText(name.get(position));
-        holder.quantity_TextView.setText(quantity.get(position));
+        holder.title_TextView.setText(title.get(position));
+        holder.description_TextView.setText(description.get(position));
+        holder.date_TextView.setText(date.get(position));
 
         return child;
     }
 
     public class Holder {
 
-        TextView name_TextView;
-        TextView quantity_TextView;
+        TextView title_TextView;
+        TextView description_TextView;
+        TextView date_TextView;
     }
 
 }

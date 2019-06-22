@@ -45,6 +45,7 @@
     <string name="birthdate">Birthdate (YYYY-MM-DD)</string>
     <string name="complete_register">Almost done! Complete your Account Registration now!</string>
     <string name="name">Name</string>
+    <string name="mark_your_date">Mark your Date!</string>
 
 
 </resources>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".frag3"
+    android:gravity="center_vertical"
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
@@ -12,18 +13,19 @@
         android:id="@+id/current_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mark your Date!"
+        android:text="@string/mark_your_date"
         android:textAlignment="center"
         android:textColor="#FFF"
-        android:textSize="30dp"
-        android:layout_marginTop="10dp"
+        android:textSize="30sp"
         android:layout_gravity="center" />
 
     <LinearLayout
         android:layout_marginTop="20dp"
-        android:layout_width="310dp"
+        android:layout_width="wrap_content"
         android:background="@drawable/bg_calendar"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_gravity="center">
 
         <CalendarView

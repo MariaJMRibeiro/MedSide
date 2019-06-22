@@ -28,10 +28,10 @@
         android:layout_width="match_parent"
         android:background="@drawable/bg_calendar"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
         <fragment

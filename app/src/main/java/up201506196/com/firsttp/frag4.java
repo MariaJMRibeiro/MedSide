@@ -67,7 +67,7 @@ public class frag4 extends Fragment implements OnMapReadyCallback{
     public void onMapReady (GoogleMap googleMap){
 
                 mMap = googleMap;
-                mMap.setMinZoomPreference(15);
+                mMap.setMinZoomPreference(12);
                 mMap.setIndoorEnabled(true);
                 UiSettings uiSettings = mMap.getUiSettings();
                 uiSettings.setIndoorLevelPickerEnabled(true);

@@ -287,6 +287,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_USER,  contentValues, COLUMN_UEMAIL+"=?", new String[]{"DEACTIVATE "+email});
 
     }
+    public String getName(int user){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor =db.rawQuery("Select * from "+TABLE_USER+" where "+COLUMN_UID+"=?", new String[]{String.valueOf(user)});
+        cursor.moveToLast();
+        return cursor.getString(cursor.getColumnIndex(COLUMN_UNAME));
+    }
 
     // Medication handling
     public boolean chkmed(String med, int user){

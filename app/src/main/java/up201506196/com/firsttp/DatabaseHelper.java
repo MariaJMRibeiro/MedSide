@@ -113,6 +113,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_LLNG + " DOUBLE)";
         db.execSQL(CREATE_LOC_TABLE);
 
+        PopulateHLocations(db);
+
+
     }
 
     @Override //enable the foreign keys
@@ -372,7 +375,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_RECORD, COLUMN_RTYPE + "=? and " + COLUMN_RUSER + "=?", new String[]{type,String.valueOf(user)});
     }
 
-
     //Appointment Handling
     public void addApp(App app){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -390,4 +392,535 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    //Locations Handling
+    public void PopulateHLocations(SQLiteDatabase db){
+        ContentValues h1 = new ContentValues();
+        h1.put(COLUMN_LTYPE, "hospital");
+        h1.put(COLUMN_LTITLE, "Hospital São João");
+        h1.put(COLUMN_LLAT, 41.180837);
+        h1.put(COLUMN_LLNG, -8.600454);
+        db.insert(TABLE_LOC, null, h1);
+
+        ContentValues h2 = new ContentValues();
+        h2.put(COLUMN_LTYPE, "hospital");
+        h2.put(COLUMN_LTITLE, "Hospital de Santo António");
+        h2.put(COLUMN_LLAT, 41.147037);
+        h2.put(COLUMN_LLNG, -8.619068);
+        db.insert(TABLE_LOC, null, h2);
+
+        ContentValues h3 = new ContentValues();
+        h3.put(COLUMN_LTYPE, "hospital");
+        h3.put(COLUMN_LTITLE, "Hospital de Braga");
+        h3.put(COLUMN_LLAT, 41.568283);
+        h3.put(COLUMN_LLNG, -8.399024);
+        db.insert(TABLE_LOC, null, h3);
+
+        ContentValues h4 = new ContentValues();
+        h4.put(COLUMN_LTYPE, "hospital");
+        h4.put(COLUMN_LTITLE, "Hospital Distrital de Bragança");
+        h4.put(COLUMN_LLAT, 41.802821);
+        h4.put(COLUMN_LLNG, -6.767725);
+        db.insert(TABLE_LOC, null, h4);
+
+        ContentValues h5 = new ContentValues();
+        h5.put(COLUMN_LTYPE, "hospital");
+        h5.put(COLUMN_LTITLE, "Hospital de Santa Luzia de Viana do Castelo");
+        h5.put(COLUMN_LLAT, 41.696899);
+        h5.put(COLUMN_LLNG, -8.832789);
+        db.insert(TABLE_LOC, null, h5);
+
+        ContentValues h6 = new ContentValues();
+        h6.put(COLUMN_LTYPE, "hospital");
+        h6.put(COLUMN_LTITLE, "Hospital São Pedro de Vila Real");
+        h6.put(COLUMN_LLAT, 41.309902);
+        h6.put(COLUMN_LLNG, -7.760265);
+        db.insert(TABLE_LOC, null, h6);
+
+        ContentValues h7 = new ContentValues();
+        h7.put(COLUMN_LTYPE, "hospital");
+        h7.put(COLUMN_LTITLE, "Hospital José Joaquim Fernandes");
+        h7.put(COLUMN_LLAT, 38.013880);
+        h7.put(COLUMN_LLNG, -7.869744);
+        db.insert(TABLE_LOC, null, h7);
+
+        ContentValues h8 = new ContentValues();
+        h8.put(COLUMN_LTYPE, "hospital");
+        h8.put(COLUMN_LTITLE, "Hospital Espírito Santo");
+        h8.put(COLUMN_LLAT, 38.567947);
+        h8.put(COLUMN_LLNG, -7.902445);
+        db.insert(TABLE_LOC, null, h8);
+
+        ContentValues h9 = new ContentValues();
+        h9.put(COLUMN_LTYPE, "hospital");
+        h9.put(COLUMN_LTITLE, "Hospital Doutor José Maria Grande");
+        h9.put(COLUMN_LLAT, 39.300199);
+        h9.put(COLUMN_LLNG, -7.428263);
+        db.insert(TABLE_LOC, null, h9);
+
+        ContentValues h10 = new ContentValues();
+        h10.put(COLUMN_LTYPE, "hospital");
+        h10.put(COLUMN_LTITLE, "Unidade Hospitalar de Faro");
+        h10.put(COLUMN_LLAT, 37.024586);
+        h10.put(COLUMN_LLNG, -7.929144);
+        db.insert(TABLE_LOC, null, h10);
+
+        ContentValues h11 = new ContentValues();
+        h11.put(COLUMN_LTYPE, "hospital");
+        h11.put(COLUMN_LTITLE, "Hospital Infante D.Pedro");
+        h11.put(COLUMN_LLAT, 40.634366);
+        h11.put(COLUMN_LLNG, -8.654766);
+        db.insert(TABLE_LOC, null, h11);
+
+        ContentValues h12 = new ContentValues();
+        h12.put(COLUMN_LTYPE, "hospital");
+        h12.put(COLUMN_LTITLE, "Hospital Amato Lusitano");
+        h12.put(COLUMN_LLAT, 39.822272);
+        h12.put(COLUMN_LLNG, -7.499922);
+        db.insert(TABLE_LOC, null, h12);
+
+        ContentValues h13 = new ContentValues();
+        h13.put(COLUMN_LTYPE, "hospital");
+        h13.put(COLUMN_LTITLE, "Hospitais da Universidade de Coimbra");
+        h13.put(COLUMN_LLAT, 40.220444);
+        h13.put(COLUMN_LLNG, -8.413084);
+        db.insert(TABLE_LOC, null, h13);
+
+        ContentValues h14 = new ContentValues();
+        h14.put(COLUMN_LTYPE, "hospital");
+        h14.put(COLUMN_LTITLE, "Hospital Geral de Coimbra");
+        h14.put(COLUMN_LLAT, 40.195606);
+        h14.put(COLUMN_LLNG, -8.459574);
+        db.insert(TABLE_LOC, null, h14);
+
+        ContentValues h15 = new ContentValues();
+        h15.put(COLUMN_LTYPE, "hospital");
+        h15.put(COLUMN_LTITLE, "Hospital Sousa Martins");
+        h15.put(COLUMN_LLAT, 40.530580);
+        h15.put(COLUMN_LLNG, -7.275576);
+        db.insert(TABLE_LOC, null, h15);
+
+        ContentValues h16 = new ContentValues();
+        h16.put(COLUMN_LTYPE, "hospital");
+        h16.put(COLUMN_LTITLE, "Hospital de Santo André");
+        h16.put(COLUMN_LLAT, 39.743558);
+        h16.put(COLUMN_LLNG, -8.795120);
+        db.insert(TABLE_LOC, null, h16);
+
+        ContentValues h17 = new ContentValues();
+        h17.put(COLUMN_LTYPE, "hospital");
+        h17.put(COLUMN_LTITLE, "Hospital São Teotónio");
+        h17.put(COLUMN_LLAT, 40.650198);
+        h17.put(COLUMN_LLNG, -7.906264);
+        db.insert(TABLE_LOC, null, h17);
+
+        ContentValues h18 = new ContentValues();
+        h18.put(COLUMN_LTYPE, "hospital");
+        h18.put(COLUMN_LTITLE, "Hospital Garcia de Horta");
+        h18.put(COLUMN_LLAT, 38.673881);
+        h18.put(COLUMN_LLNG, -9.176851);
+        db.insert(TABLE_LOC, null, h18);
+
+        ContentValues h19 = new ContentValues();
+        h19.put(COLUMN_LTYPE, "hospital");
+        h19.put(COLUMN_LTITLE, "Hospital São Bernardo");
+        h19.put(COLUMN_LLAT, 38.529072);
+        h19.put(COLUMN_LLNG, -8.880155);
+        db.insert(TABLE_LOC, null, h19);
+
+        ContentValues h20 = new ContentValues();
+        h20.put(COLUMN_LTYPE, "hospital");
+        h20.put(COLUMN_LTITLE, "Hospital Distrital de Santarém");
+        h20.put(COLUMN_LLAT, 39.241201);
+        h20.put(COLUMN_LLNG, -8.697036);
+        db.insert(TABLE_LOC, null, h20);
+
+        ContentValues h21 = new ContentValues();
+        h21.put(COLUMN_LTYPE, "hospital");
+        h21.put(COLUMN_LTITLE, "Hospital Santa Maria");
+        h21.put(COLUMN_LLAT, 38.747988);
+        h21.put(COLUMN_LLNG, -9.160658);
+        db.insert(TABLE_LOC, null, h21);
+
+        ContentValues h22 = new ContentValues();
+        h22.put(COLUMN_LTYPE, "hospital");
+        h22.put(COLUMN_LTITLE, "Hospital São Francisco Xavier");
+        h22.put(COLUMN_LLAT, 38.707338);
+        h22.put(COLUMN_LLNG, -9.217824);
+        db.insert(TABLE_LOC, null, h22);
+
+        ContentValues h23 = new ContentValues();
+        h23.put(COLUMN_LTYPE, "hospital");
+        h23.put(COLUMN_LTITLE, "Hospital Dona Estefânia");
+        h23.put(COLUMN_LLAT, 38.728709);
+        h23.put(COLUMN_LLNG, -9.139173);
+        db.insert(TABLE_LOC, null, h23);
+
+        ContentValues h24 = new ContentValues();
+        h24.put(COLUMN_LTYPE, "hospital");
+        h24.put(COLUMN_LTITLE, "Hospital do Divino Espírito Santo");
+        h24.put(COLUMN_LLAT, 37.751661);
+        h24.put(COLUMN_LLNG, -25.676221);
+        db.insert(TABLE_LOC, null, h24);
+
+        ContentValues h25 = new ContentValues();
+        h25.put(COLUMN_LTYPE, "hospital");
+        h25.put(COLUMN_LTITLE, "Hospital Dr. Nélio Mendonça");
+        h25.put(COLUMN_LLAT, 32.648299);
+        h25.put(COLUMN_LLNG, -16.924070);
+        db.insert(TABLE_LOC, null, h25);
+    }
+
+    public void PopulatePhLocations(SQLiteDatabase db){
+        ContentValues f1 = new ContentValues();
+        f1.put(COLUMN_LTYPE, "pharmacy");
+        f1.put(COLUMN_LTITLE, "Farmácia Pimentel");
+        f1.put(COLUMN_LLAT, 41.557467);
+        f1.put(COLUMN_LLNG, -8.408616);
+        db.insert(TABLE_LOC, null, f1);
+
+        ContentValues f2 = new ContentValues();
+        f2.put(COLUMN_LTYPE, "pharmacy");
+        f2.put(COLUMN_LTITLE, "Farmácia São João");
+        f2.put(COLUMN_LLAT, 41.544978);
+        f2.put(COLUMN_LLNG, -8.419484);
+        db.insert(TABLE_LOC, null, f2);
+
+        ContentValues f3 = new ContentValues();
+        f3.put(COLUMN_LTYPE, "pharmacy");
+        f3.put(COLUMN_LTITLE, "Farmácia Mariano");
+        f3.put(COLUMN_LLAT, 41.806193);
+        f3.put(COLUMN_LLNG, -6.756574);
+        db.insert(TABLE_LOC, null, f3);
+
+        ContentValues f4 = new ContentValues();
+        f4.put(COLUMN_LTYPE, "pharmacyl");
+        f4.put(COLUMN_LTITLE, "Farmácia Central");
+        f4.put(COLUMN_LLAT, 41.817940);
+        f4.put(COLUMN_LLNG, -6.754964);
+        db.insert(TABLE_LOC, null, f4);
+
+        ContentValues f5 = new ContentValues();
+        f5.put(COLUMN_LTYPE, "pharmacy");
+        f5.put(COLUMN_LTITLE, "Farmácia Central do Porto");
+        f5.put(COLUMN_LLAT, 41.157170);
+        f5.put(COLUMN_LLNG, -8.642913);
+        db.insert(TABLE_LOC, null, f5);
+
+        ContentValues f6 = new ContentValues();
+        f6.put(COLUMN_LTYPE, "pharmacy");
+        f6.put(COLUMN_LTITLE, "Farmácia Boavista");
+        f6.put(COLUMN_LLAT, 41.156382);
+        f6.put(COLUMN_LLNG, -8.620384);
+        db.insert(TABLE_LOC, null, f6);
+
+        ContentValues f7 = new ContentValues();
+        f7.put(COLUMN_LTYPE, "pharmacy");
+        f7.put(COLUMN_LTITLE, "Farmácia São João");
+        f7.put(COLUMN_LLAT, 41.183773);
+        f7.put(COLUMN_LLNG, -8.600791);
+        db.insert(TABLE_LOC, null, f7);
+
+        ContentValues f8 = new ContentValues();
+        f8.put(COLUMN_LTYPE, "pharmacy");
+        f8.put(COLUMN_LTITLE, "Farmácia Costa Cabral");
+        f8.put(COLUMN_LLAT, 41.172076);
+        f8.put(COLUMN_LLNG, -8.587654);
+        db.insert(TABLE_LOC, null, f8);
+
+        ContentValues h9 = new ContentValues();
+        h9.put(COLUMN_LTYPE, "pharmacy");
+        h9.put(COLUMN_LTITLE, "Farmácia S.Vicente");
+        h9.put(COLUMN_LLAT, 41.703989);
+        h9.put(COLUMN_LLNG, -8.816906);
+        db.insert(TABLE_LOC, null, h9);
+
+        ContentValues h10 = new ContentValues();
+        h10.put(COLUMN_LTYPE, "pharmacy");
+        h10.put(COLUMN_LTITLE, "Farmácia S.Domingos");
+        h10.put(COLUMN_LLAT, 41.691565);
+        h10.put(COLUMN_LLNG, -8.833537);
+        db.insert(TABLE_LOC, null, h10);
+
+        ContentValues h11 = new ContentValues();
+        h11.put(COLUMN_LTYPE, "pharmacy");
+        h11.put(COLUMN_LTITLE, "Farmácia de Montezelos");
+        h11.put(COLUMN_LLAT, 41.308321);
+        h11.put(COLUMN_LLNG, -7.744253);
+        db.insert(TABLE_LOC, null, h11);
+
+        ContentValues h12 = new ContentValues();
+        h12.put(COLUMN_LTYPE, "pharmacy");
+        h12.put(COLUMN_LTITLE, "Farmácia Baptista Lda.");
+        h12.put(COLUMN_LLAT, 41.297504);
+        h12.put(COLUMN_LLNG, -7.744270);
+        db.insert(TABLE_LOC, null, h12);
+
+        ContentValues h13 = new ContentValues();
+        h13.put(COLUMN_LTYPE, "pharmacy");
+        h13.put(COLUMN_LTITLE, "Farmácia Moderna");
+        h13.put(COLUMN_LLAT, 40.638966);
+        h13.put(COLUMN_LLNG, -8.652484);
+        db.insert(TABLE_LOC, null, h13);
+
+        ContentValues h14 = new ContentValues();
+        h14.put(COLUMN_LTYPE, "pharmacy");
+        h14.put(COLUMN_LTITLE, "Farmácia Nova");
+        h14.put(COLUMN_LLAT, 40.629225);
+        h14.put(COLUMN_LLNG, -8.647812);
+        db.insert(TABLE_LOC, null, h14);
+
+        ContentValues h15 = new ContentValues();
+        h15.put(COLUMN_LTYPE, "pharmacy");
+        h15.put(COLUMN_LTITLE, "Farmácia Progresso");
+        h15.put(COLUMN_LLAT, 39.807707);
+        h15.put(COLUMN_LLNG, -7.514121);
+        db.insert(TABLE_LOC, null, h15);
+
+        ContentValues h16 = new ContentValues();
+        h16.put(COLUMN_LTYPE, "pharmacy");
+        h16.put(COLUMN_LTITLE, "Farmácia Rodrigues dos Santos");
+        h16.put(COLUMN_LLAT, 39.818655);
+        h16.put(COLUMN_LLNG, -7.496509);
+        db.insert(TABLE_LOC, null, h16);
+
+        ContentValues h17 = new ContentValues();
+        h17.put(COLUMN_LTYPE, "pharmacy");
+        h17.put(COLUMN_LTITLE, "Farmácia Coimbra");
+        h17.put(COLUMN_LLAT, 40.194310);
+        h17.put(COLUMN_LLNG, -8.408461);
+        db.insert(TABLE_LOC, null, h17);
+
+        ContentValues h18 = new ContentValues();
+        h18.put(COLUMN_LTYPE, "pharmacy");
+        h18.put(COLUMN_LTITLE, "Farmácia Baptista");
+        h18.put(COLUMN_LLAT, 40.210011);
+        h18.put(COLUMN_LLNG, -8.419929);
+        db.insert(TABLE_LOC, null, h18);
+
+        ContentValues h19 = new ContentValues();
+        h19.put(COLUMN_LTYPE, "pharmacy");
+        h19.put(COLUMN_LTITLE, "Farmácia dos Olivais");
+        h19.put(COLUMN_LLAT, 40.216512);
+        h19.put(COLUMN_LLNG, -8.408074);
+        db.insert(TABLE_LOC, null, h19);
+
+        ContentValues h20 = new ContentValues();
+        h20.put(COLUMN_LTYPE, "pharmacy");
+        h20.put(COLUMN_LTITLE, "Farmácia Rainha Santa");
+        h20.put(COLUMN_LLAT, 40.213976);
+        h20.put(COLUMN_LLNG, -8.434440);
+        db.insert(TABLE_LOC, null, h20);
+
+        ContentValues h21 = new ContentValues();
+        h21.put(COLUMN_LTYPE, "pharmacy");
+        h21.put(COLUMN_LTITLE, "Farmácia Moderna Guarda");
+        h21.put(COLUMN_LLAT, 40.555062);
+        h21.put(COLUMN_LLNG, -7.245718);
+        db.insert(TABLE_LOC, null, h21);
+
+        ContentValues h22 = new ContentValues();
+        h22.put(COLUMN_LTYPE, "pharmacy");
+        h22.put(COLUMN_LTITLE, "Farmácia Central");
+        h22.put(COLUMN_LLAT, 40.538219);
+        h22.put(COLUMN_LLNG, -7.267802);
+        db.insert(TABLE_LOC, null, h22);
+
+        ContentValues h23 = new ContentValues();
+        h23.put(COLUMN_LTYPE, "pharmacy");
+        h23.put(COLUMN_LTITLE, "Farmácia Sanches");
+        h23.put(COLUMN_LLAT, 39.739727);
+        h23.put(COLUMN_LLNG, -8.808222);
+        db.insert(TABLE_LOC, null, h23);
+
+        ContentValues h24 = new ContentValues();
+        h24.put(COLUMN_LTYPE, "pharmacy");
+        h24.put(COLUMN_LTITLE, "Farmáicia Lis");
+        h24.put(COLUMN_LLAT, 39.762225);
+        h24.put(COLUMN_LLNG, -8.822028);
+        db.insert(TABLE_LOC, null, h24);
+
+        ContentValues h25 = new ContentValues();
+        h25.put(COLUMN_LTYPE, "pharmacy");
+        h25.put(COLUMN_LTITLE, "Farmácia Portugal de Viseu");
+        h25.put(COLUMN_LLAT, 40.657726);
+        h25.put(COLUMN_LLNG, -7.916081);
+        db.insert(TABLE_LOC, null, h25);
+
+        ContentValues h26 = new ContentValues();
+        h26.put(COLUMN_LTYPE, "pharmacy");
+        h26.put(COLUMN_LTITLE, "Farmácia Viriato");
+        h26.put(COLUMN_LLAT, 40.671699);
+        h26.put(COLUMN_LLNG, -7.919858);
+        db.insert(TABLE_LOC, null, h26);
+
+        ContentValues f2 = new ContentValues();
+        f2.put(COLUMN_LTYPE, "pharmacy");
+        f2.put(COLUMN_LTITLE, "Farmácia São João");
+        f2.put(COLUMN_LLAT, 41.544978);
+        f2.put(COLUMN_LLNG, -8.419484);
+        db.insert(TABLE_LOC, null, f2);
+
+        ContentValues f3 = new ContentValues();
+        f3.put(COLUMN_LTYPE, "pharmacy");
+        f3.put(COLUMN_LTITLE, "Farmácia Mariano");
+        f3.put(COLUMN_LLAT, 41.806193);
+        f3.put(COLUMN_LLNG, -6.756574);
+        db.insert(TABLE_LOC, null, f3);
+
+        ContentValues f4 = new ContentValues();
+        f4.put(COLUMN_LTYPE, "pharmacyl");
+        f4.put(COLUMN_LTITLE, "Farmácia Central");
+        f4.put(COLUMN_LLAT, 41.817940);
+        f4.put(COLUMN_LLNG, -6.754964);
+        db.insert(TABLE_LOC, null, f4);
+
+        ContentValues f5 = new ContentValues();
+        f5.put(COLUMN_LTYPE, "pharmacy");
+        f5.put(COLUMN_LTITLE, "Farmácia Central do Porto");
+        f5.put(COLUMN_LLAT, 41.157170);
+        f5.put(COLUMN_LLNG, -8.642913);
+        db.insert(TABLE_LOC, null, f5);
+
+        ContentValues f6 = new ContentValues();
+        f6.put(COLUMN_LTYPE, "pharmacy");
+        f6.put(COLUMN_LTITLE, "Farmácia Boavista");
+        f6.put(COLUMN_LLAT, 41.156382);
+        f6.put(COLUMN_LLNG, -8.620384);
+        db.insert(TABLE_LOC, null, f6);
+
+        ContentValues f7 = new ContentValues();
+        f7.put(COLUMN_LTYPE, "pharmacy");
+        f7.put(COLUMN_LTITLE, "Farmácia São João");
+        f7.put(COLUMN_LLAT, 41.183773);
+        f7.put(COLUMN_LLNG, -8.600791);
+        db.insert(TABLE_LOC, null, f7);
+
+        ContentValues f8 = new ContentValues();
+        f8.put(COLUMN_LTYPE, "pharmacy");
+        f8.put(COLUMN_LTITLE, "Farmácia Costa Cabral");
+        f8.put(COLUMN_LLAT, 41.172076);
+        f8.put(COLUMN_LLNG, -8.587654);
+        db.insert(TABLE_LOC, null, f8);
+
+        ContentValues h9 = new ContentValues();
+        h9.put(COLUMN_LTYPE, "pharmacy");
+        h9.put(COLUMN_LTITLE, "Farmácia S.Vicente");
+        h9.put(COLUMN_LLAT, 41.703989);
+        h9.put(COLUMN_LLNG, -8.816906);
+        db.insert(TABLE_LOC, null, h9);
+
+        ContentValues h10 = new ContentValues();
+        h10.put(COLUMN_LTYPE, "pharmacy");
+        h10.put(COLUMN_LTITLE, "Farmácia S.Domingos");
+        h10.put(COLUMN_LLAT, 41.691565);
+        h10.put(COLUMN_LLNG, -8.833537);
+        db.insert(TABLE_LOC, null, h10);
+
+        ContentValues h11 = new ContentValues();
+        h11.put(COLUMN_LTYPE, "pharmacy");
+        h11.put(COLUMN_LTITLE, "Farmácia de Montezelos");
+        h11.put(COLUMN_LLAT, 41.308321);
+        h11.put(COLUMN_LLNG, -7.744253);
+        db.insert(TABLE_LOC, null, h11);
+
+        ContentValues h12 = new ContentValues();
+        h12.put(COLUMN_LTYPE, "pharmacy");
+        h12.put(COLUMN_LTITLE, "Farmácia Baptista Lda.");
+        h12.put(COLUMN_LLAT, 41.297504);
+        h12.put(COLUMN_LLNG, -7.744270);
+        db.insert(TABLE_LOC, null, h12);
+
+        ContentValues h13 = new ContentValues();
+        h13.put(COLUMN_LTYPE, "pharmacy");
+        h13.put(COLUMN_LTITLE, "Farmácia Moderna");
+        h13.put(COLUMN_LLAT, 40.638966);
+        h13.put(COLUMN_LLNG, -8.652484);
+        db.insert(TABLE_LOC, null, h13);
+
+        ContentValues h14 = new ContentValues();
+        h14.put(COLUMN_LTYPE, "pharmacy");
+        h14.put(COLUMN_LTITLE, "Farmácia Nova");
+        h14.put(COLUMN_LLAT, 40.629225);
+        h14.put(COLUMN_LLNG, -8.647812);
+        db.insert(TABLE_LOC, null, h14);
+
+        ContentValues h15 = new ContentValues();
+        h15.put(COLUMN_LTYPE, "pharmacy");
+        h15.put(COLUMN_LTITLE, "Farmácia Progresso");
+        h15.put(COLUMN_LLAT, 39.807707);
+        h15.put(COLUMN_LLNG, -7.514121);
+        db.insert(TABLE_LOC, null, h15);
+
+        ContentValues h16 = new ContentValues();
+        h16.put(COLUMN_LTYPE, "pharmacy");
+        h16.put(COLUMN_LTITLE, "Farmácia Rodrigues dos Santos");
+        h16.put(COLUMN_LLAT, 39.818655);
+        h16.put(COLUMN_LLNG, -7.496509);
+        db.insert(TABLE_LOC, null, h16);
+
+        ContentValues h17 = new ContentValues();
+        h17.put(COLUMN_LTYPE, "pharmacy");
+        h17.put(COLUMN_LTITLE, "Farmácia Coimbra");
+        h17.put(COLUMN_LLAT, 40.194310);
+        h17.put(COLUMN_LLNG, -8.408461);
+        db.insert(TABLE_LOC, null, h17);
+
+        ContentValues h18 = new ContentValues();
+        h18.put(COLUMN_LTYPE, "pharmacy");
+        h18.put(COLUMN_LTITLE, "Farmácia Baptista");
+        h18.put(COLUMN_LLAT, 40.210011);
+        h18.put(COLUMN_LLNG, -8.419929);
+        db.insert(TABLE_LOC, null, h18);
+
+        ContentValues h19 = new ContentValues();
+        h19.put(COLUMN_LTYPE, "pharmacy");
+        h19.put(COLUMN_LTITLE, "Farmácia dos Olivais");
+        h19.put(COLUMN_LLAT, 40.216512);
+        h19.put(COLUMN_LLNG, -8.408074);
+        db.insert(TABLE_LOC, null, h19);
+
+        ContentValues h20 = new ContentValues();
+        h20.put(COLUMN_LTYPE, "pharmacy");
+        h20.put(COLUMN_LTITLE, "Farmácia Rainha Santa");
+        h20.put(COLUMN_LLAT, 40.213976);
+        h20.put(COLUMN_LLNG, -8.434440);
+        db.insert(TABLE_LOC, null, h20);
+
+        ContentValues h21 = new ContentValues();
+        h21.put(COLUMN_LTYPE, "pharmacy");
+        h21.put(COLUMN_LTITLE, "Farmácia Moderna Guarda");
+        h21.put(COLUMN_LLAT, 40.555062);
+        h21.put(COLUMN_LLNG, -7.245718);
+        db.insert(TABLE_LOC, null, h21);
+
+        ContentValues h22 = new ContentValues();
+        h22.put(COLUMN_LTYPE, "pharmacy");
+        h22.put(COLUMN_LTITLE, "Farmácia Central");
+        h22.put(COLUMN_LLAT, 40.538219);
+        h22.put(COLUMN_LLNG, -7.267802);
+        db.insert(TABLE_LOC, null, h22);
+
+        ContentValues h23 = new ContentValues();
+        h23.put(COLUMN_LTYPE, "pharmacy");
+        h23.put(COLUMN_LTITLE, "Farmácia Sanches");
+        h23.put(COLUMN_LLAT, 39.739727);
+        h23.put(COLUMN_LLNG, -8.808222);
+        db.insert(TABLE_LOC, null, h23);
+
+        ContentValues h24 = new ContentValues();
+        h24.put(COLUMN_LTYPE, "pharmacy");
+        h24.put(COLUMN_LTITLE, "Farmáicia Lis");
+        h24.put(COLUMN_LLAT, 39.762225);
+        h24.put(COLUMN_LLNG, -8.822028);
+        db.insert(TABLE_LOC, null, h24);
+
+        ContentValues h25 = new ContentValues();
+        h25.put(COLUMN_LTYPE, "pharmacy");
+        h25.put(COLUMN_LTITLE, "Farmácia Portugal de Viseu");
+        h25.put(COLUMN_LLAT, 40.657726);
+        h25.put(COLUMN_LLNG, -7.916081);
+        db.insert(TABLE_LOC, null, h25);
+
+
+    }
 }

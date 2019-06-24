@@ -347,10 +347,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor =db.rawQuery("Select * from "+TABLE_MEDICATION+" where "+COLUMN_MUSER+ "=? and " +COLUMN_MNAME+ "=?", new String[]{String.valueOf(user),name});
         cursor.moveToLast();
         int last_quantity= cursor.getInt(cursor.getColumnIndex(COLUMN_MQUANTITY));
-        if (last_quantity<=medication.getQuantity()){
+        if (last_quantity<medication.getQuantity()){
             return false;
-        }
-        else{
+        }else if(last_quantity==medication.getQuantity()){
+            deleteMedication(medication.getName(),medication.getUser());
+            return true;
+        }else{
             int new_quantity=last_quantity-medication.getQuantity();
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_MQUANTITY, new_quantity);

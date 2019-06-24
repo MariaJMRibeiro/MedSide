@@ -3,9 +3,11 @@ package up201506196.com.firsttp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
@@ -58,8 +60,12 @@ public class ChangePassword extends AppCompatActivity {
                                 e2.setText("");
                                 e3.setText("");
                             }
-                        }else
-                            Toast.makeText(getApplicationContext(), "Password must contain at least 6 characters UPPER/lowercase and number", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Password must contain at least 6 characters UPPER/lowercase and number", Toast.LENGTH_SHORT);
+                            TextView tv = toast.getView().findViewById(android.R.id.message);
+                            if (tv != null) tv.setGravity(Gravity.CENTER);
+                            toast.show();
+                        }
                     }else {
                         Toast.makeText(getApplicationContext(), "Current password incorrect", Toast.LENGTH_SHORT).show();
                         e.setText("");

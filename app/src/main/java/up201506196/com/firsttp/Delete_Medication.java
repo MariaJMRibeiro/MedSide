@@ -3,9 +3,11 @@ package up201506196.com.firsttp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Delete_Medication extends AppCompatActivity {
@@ -38,7 +40,10 @@ public class Delete_Medication extends AppCompatActivity {
                         Intent i = new Intent(Delete_Medication.this, InitialPage.class);
                         i.putExtra("key_email", user);
                         startActivity(i);
-                        Toast.makeText(getApplicationContext(), name + " was deleted successfully", Toast.LENGTH_SHORT).show();
+                        Toast t= Toast.makeText(getApplicationContext(), name + " was deleted successfully", Toast.LENGTH_SHORT);
+                        TextView tv = t.getView().findViewById(android.R.id.message);
+                        if (tv != null) tv.setGravity(Gravity.CENTER);
+                        t.show();
                     }
                     else {
                         int quantity = Integer.parseInt(s2);
@@ -48,16 +53,19 @@ public class Delete_Medication extends AppCompatActivity {
                         i.putExtra("key_email", user);
                         startActivity(i);
                         if (delete) {
-                            Toast.makeText(getApplicationContext(), quantity+" "+name + "(s) successfully deleted", Toast.LENGTH_SHORT).show();
+                            Toast t2=Toast.makeText(getApplicationContext(), quantity+" "+name + "(s) successfully deleted", Toast.LENGTH_SHORT);
+                            TextView tv = t2.getView().findViewById(android.R.id.message);
+                            if (tv != null) tv.setGravity(Gravity.CENTER);
+                            t2.show();
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), "Error: not able to delete "+quantity+" "+name + "(s)", Toast.LENGTH_SHORT).show();
+                            Toast t3=Toast.makeText(getApplicationContext(), "Error: not able to delete "+quantity+" "+name + "(s)", Toast.LENGTH_SHORT);
+                            TextView tv = t3.getView().findViewById(android.R.id.message);
+                            if (tv != null) tv.setGravity(Gravity.CENTER);
+                            t3.show();
                         }
-
-
                     }
                 }
-
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {

@@ -15,9 +15,11 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.series.DataPoint;
@@ -91,7 +93,10 @@ public class DoctorComunication extends AppCompatActivity {
         }
         catch (Throwable t)
         {
-            Toast.makeText(this, "Request failed try again: " + t.toString(),Toast.LENGTH_LONG).show();
+            Toast toast=Toast.makeText(this, "Request failed try again: " + t.toString(),Toast.LENGTH_LONG);
+            TextView tv = toast.getView().findViewById(android.R.id.message);
+            if (tv != null) tv.setGravity(Gravity.CENTER);
+            toast.show();
         }
     }
 
@@ -119,7 +124,10 @@ public class DoctorComunication extends AppCompatActivity {
             try {
                 writeTextFile(textFile);
             } catch (IOException ex){
-                Toast.makeText(getApplicationContext(), "Something went wrong!" + ex.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast toast1=Toast.makeText(getApplicationContext(), "Something went wrong!" + ex.getMessage(), Toast.LENGTH_SHORT);
+                TextView tv = toast1.getView().findViewById(android.R.id.message);
+                if (tv != null) tv.setGravity(Gravity.CENTER);
+                toast1.show();
             }
         }
     }

@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -83,13 +84,21 @@ public class MainActivity extends AppCompatActivity {
                                                 }
                                             });
                                             alertDialog.show();
-                                        } else
-                                            Toast.makeText(getApplicationContext(), "Trying to return to a deactivated account: \n please enter the correct password!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast toast = Toast.makeText(getApplicationContext(), "Trying to return to a deactivated account: \n please enter the correct password!", Toast.LENGTH_SHORT);
+                                            TextView tv = toast.getView().findViewById(android.R.id.message);
+                                            if (tv != null) tv.setGravity(Gravity.CENTER);
+                                            toast.show();
+                                        }
                                     }
                                 }else
                                     Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
-                            }else
-                                Toast.makeText(getApplicationContext(), "Password must contain at least 6 characters UPPER/lowercase and number", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast toast1=Toast.makeText(getApplicationContext(), "Password must contain at least 6 characters UPPER/lowercase and number", Toast.LENGTH_SHORT);
+                                TextView tv = toast1.getView().findViewById(android.R.id.message);
+                                if (tv != null) tv.setGravity(Gravity.CENTER);
+                                toast1.show();
+                            }
                         }else
                             Toast.makeText(getApplicationContext(), "Email already exists", Toast.LENGTH_SHORT).show();
                     } else

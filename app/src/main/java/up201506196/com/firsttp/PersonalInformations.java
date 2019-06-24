@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -103,7 +105,10 @@ public class PersonalInformations extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Personal Information Changed Successfully", Toast.LENGTH_SHORT).show();
                                     } catch (java.text.ParseException e) {
                                         // TODO Auto-generated catch block
-                                        Toast.makeText(getApplicationContext(), "Please field a valid Birthdate (YYYY-MM-DD)", Toast.LENGTH_SHORT).show();
+                                        Toast toast=Toast.makeText(getApplicationContext(), "Please field a valid Birthdate (YYYY-MM-DD)", Toast.LENGTH_SHORT);
+                                        TextView tv = toast.getView().findViewById(android.R.id.message);
+                                        if (tv != null) tv.setGravity(Gravity.CENTER);
+                                        toast.show();
                                     }
 
                                 } else

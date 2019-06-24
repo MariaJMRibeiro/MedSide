@@ -5,6 +5,7 @@ import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,7 +65,10 @@ public class CompleteRegister extends AppCompatActivity {
                             catch (java.text.ParseException e)
                             {
                                 // TODO Auto-generated catch block
-                                Toast.makeText(getApplicationContext(), "Please field a valid Birthdate (YYYY-MM-DD)", Toast.LENGTH_SHORT).show();
+                                Toast toast= Toast.makeText(getApplicationContext(), "Please field a valid Birthdate (YYYY-MM-DD)", Toast.LENGTH_SHORT);
+                                TextView tv = toast.getView().findViewById(android.R.id.message);
+                                if (tv != null) tv.setGravity(Gravity.CENTER);
+                                toast.show();
                             }
 
                         }

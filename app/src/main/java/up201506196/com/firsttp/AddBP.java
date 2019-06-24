@@ -3,9 +3,11 @@ package up201506196.com.firsttp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddBP extends AppCompatActivity {
@@ -29,7 +31,10 @@ public class AddBP extends AppCompatActivity {
                 String val1 = e1.getText().toString();
                 String val2 = e2.getText().toString();
                 if (val1.equals("") || val2.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Please enter both Diastolic and Systolic Blood Pressure", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please enter both Diastolic and Systolic Blood Pressure", Toast.LENGTH_SHORT);
+                    TextView tv = (TextView) toast.getView().findViewById(android.R.id.message);
+                    if( tv != null) tv.setGravity(Gravity.CENTER);
+                    toast.show();
                 } else {
                     int value1 = Integer.parseInt(val1);
                     int value2 = Integer.parseInt(val2);

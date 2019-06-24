@@ -30,6 +30,7 @@ public class frag3 extends Fragment {
     Button b1,b2;
     ArrayList<String> this_title;
     ArrayList<String> this_description;
+    String my_date;
     ArrayList<String> this_date;
     AppListAdapter listAdapter ;
     SQLiteDatabase sqLiteDatabase;
@@ -61,7 +62,7 @@ public class frag3 extends Fragment {
         calender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                final String date= dayOfMonth + "/" + (month+1) + "/" + year;
+                final String date= year + "-" + (month+1) + "-" + dayOfMonth;
                 currentDate.setText(date);
                 b1.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -91,7 +92,7 @@ public class frag3 extends Fragment {
                 this_description = new ArrayList<>();
                 this_date = new ArrayList<>();
 
-                Cursor app_cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_APP + " WHERE " + db.COLUMN_AUSER + "=?" , new String[]{String.valueOf(user)});
+                Cursor app_cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_APP + " WHERE " + db.COLUMN_AUSER + "=?"+" order by " + db.COLUMN_ADATE, new String[]{String.valueOf(user)});
 
                 this_date.clear();
                 this_title.clear();
@@ -99,11 +100,19 @@ public class frag3 extends Fragment {
 
                 if (app_cursor.moveToFirst()) {
                     do {
-
-                        this_date.add(app_cursor.getString(app_cursor.getColumnIndex(db.COLUMN_ADATE)));
-                        this_title.add(app_cursor.getString(app_cursor.getColumnIndex(db.COLUMN_ATITLE)));
-                        this_description.add(app_cursor.getString(app_cursor.getColumnIndex(db.COLUMN_ADESCRIPTION)));
-
+                        my_date=app_cursor.getString(app_cursor.getColumnIndex(db.COLUMN_ADATE));
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date strDate = null;
+                        try {
+                            strDate = sdf.parse(my_date);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        if (System.currentTimeMillis() <= strDate.getTime()) {
+                            this_date.add(my_date);
+                            this_title.add(app_cursor.getString(app_cursor.getColumnIndex(db.COLUMN_ATITLE)));
+                            this_description.add(app_cursor.getString(app_cursor.getColumnIndex(db.COLUMN_ADESCRIPTION)));
+                        }
                     } while (app_cursor.moveToNext());
                 }
                 else{

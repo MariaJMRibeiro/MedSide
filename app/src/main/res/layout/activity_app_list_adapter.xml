@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
     android:orientation="vertical"
     >
 
@@ -16,7 +18,7 @@
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="40"
+            android:layout_weight="50"
             android:textSize="20sp"
             android:text="TextView" />
 
@@ -26,7 +28,7 @@
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="60"
+            android:layout_weight="50"
             android:text="TextView" />
 
     </LinearLayout>
@@ -35,8 +37,7 @@
         android:id="@+id/show_description"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:layout_marginRight="80dp"
-        android:layout_marginLeft="80dp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />

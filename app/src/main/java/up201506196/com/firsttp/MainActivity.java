@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         t1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                t1.setTextColor(Color.parseColor("#6491B9"));
                 Intent i= new Intent(MainActivity.this,Login.class);
                 startActivity(i);
             }

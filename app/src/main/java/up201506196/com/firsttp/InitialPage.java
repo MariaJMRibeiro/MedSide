@@ -1,5 +1,8 @@
 package up201506196.com.firsttp;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +23,9 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class InitialPage extends AppCompatActivity {
 
@@ -49,6 +55,27 @@ public class InitialPage extends AppCompatActivity {
 
         int index = getIntent().getIntExtra("toOpen", 0);
         mViewPager.setCurrentItem(index);
+
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent receiverIntent = new Intent(InitialPage.this, Receiver.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(getApplicationContext(),0, receiverIntent, 0); //The second parameter is unique to this PendingIntent,
+
+
+
+        int hour = 8;
+        int minute =30;
+
+        Calendar alarmCalendarTime = Calendar.getInstance();
+        alarmCalendarTime.set(Calendar.HOUR_OF_DAY, hour);
+        alarmCalendarTime.set(Calendar.MINUTE, minute);
+        alarmCalendarTime.set(Calendar.SECOND, 0);
+
+        if (alarmCalendarTime.before(Calendar.getInstance())) {
+            alarmCalendarTime.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, alarmCalendarTime.getTimeInMillis(), TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS), alarmIntent);
+
 
     }
 

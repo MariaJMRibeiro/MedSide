@@ -361,6 +361,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         }
     }
+    public void StockUpdate(){
+        SQLiteDatabase db=this.getWritableDatabase();
+        int last_quantity;
+        int new_quantity;
+        int id;
+        String name;
+        int user;
+        Cursor cursor = db.rawQuery("Select * from "+TABLE_MEDICATION, null);
+        if (cursor.moveToFirst()) {
+            do {
+                last_quantity= cursor.getInt(cursor.getColumnIndex(COLUMN_MQUANTITY));
+                if (last_quantity==1){
+                    name=cursor.getString(cursor.getColumnIndex(COLUMN_MNAME));
+                    user=cursor.getInt(cursor.getColumnIndex(COLUMN_MUSER));
+                    deleteMedication(name,user);
+                }else {
+                    new_quantity = last_quantity - 1;
+                    id = cursor.getInt(cursor.getColumnIndex(COLUMN_MID));
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put(COLUMN_MQUANTITY, new_quantity);
+                    db.update(TABLE_MEDICATION, contentValues, COLUMN_MID + "=?", new String[]{String.valueOf(id)});
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+    }
 
     //Record handling
     public void addRecord(Record record) {

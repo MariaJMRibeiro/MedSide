@@ -409,6 +409,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // delete raw
         db.delete(TABLE_RECORD, COLUMN_RTYPE + "=? and " + COLUMN_RUSER + "=?", new String[]{type,String.valueOf(user)});
     }
+    public void deleteWeight(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // delete raw
+        db.delete(TABLE_RECORD, COLUMN_RID + "=?", new String[]{String.valueOf(id)});
+    }
 
     //Appointment Handling
     public void addApp(App app){
@@ -425,6 +430,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_APP, null, values);
 
 
+    }
+    public void deleteApp(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // delete raw
+        db.delete(TABLE_APP, COLUMN_AID + "=? ", new String[]{String.valueOf(id)});
     }
 
     //Locations Handling
@@ -958,4 +968,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+
+
 }

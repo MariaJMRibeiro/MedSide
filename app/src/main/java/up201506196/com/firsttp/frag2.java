@@ -1,6 +1,7 @@
 package up201506196.com.firsttp;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -45,7 +46,9 @@ public class frag2 extends Fragment {
     private Spinner mSpinner;
     ArrayList<String> this_weight;
     ArrayList<String> this_date;
+    ArrayList<Integer> this_id;
     MedListAdapter listAdapter ;
+    int weight_id;
 
     public frag2() {
         // Required empty public constructor
@@ -434,25 +437,30 @@ public class frag2 extends Fragment {
 
                                 this_weight = new ArrayList<String>();
                                 this_date = new ArrayList<String>();
+                                this_id = new ArrayList<>();
 
                                 String typew="weight";
                                 Cursor weight_cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+db.TABLE_RECORD + " WHERE " + db.COLUMN_RUSER + " = ? " + " AND " + db.COLUMN_RTYPE + "=?", new String[]{String.valueOf(user),typew});
 
                                 this_date.clear();
                                 this_weight.clear();
+                                this_id.clear();
+
 
                                 if (weight_cursor.moveToFirst()) {
                                     do {
-
+                                        this_id.add(weight_cursor.getInt(weight_cursor.getColumnIndex(db.COLUMN_RID)));
                                         this_date.add(getDateFromatedString(weight_cursor.getString(weight_cursor.getColumnIndex(db.COLUMN_RDATE))));
                                         this_weight.add(weight_cursor.getString(weight_cursor.getColumnIndex(db.COLUMN_RVALUE)));
 
                                     } while (weight_cursor.moveToNext());
                                 }
-                                else{
+
+                                if(this_id.isEmpty()){
                                     TextView caution = convertView.findViewById(R.id.weight_caution);
                                     caution.setVisibility(View.VISIBLE);
                                 }
+                                weight_cursor.close();
 
                                 listAdapter = new MedListAdapter(getActivity(),
                                         this_date,
@@ -460,9 +468,27 @@ public class frag2 extends Fragment {
                                 );
 
                                 lv.setAdapter(listAdapter);
-                                weight_cursor.close();
-
                                 alertDialog.show();
+                                lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                                    @Override
+                                    public boolean onItemLongClick(AdapterView<?> arg0, View arg1, final int position, long arg3) {
+                                        weight_id=this_id.get(position);
+                                        AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(getContext());
+                                        alertDialog2.setTitle("Weight Record: "+ this_weight.get(position)+ " kg" );
+                                        alertDialog2.setMessage("Do you want to delete this record?");
+                                        alertDialog2.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                db.deleteWeight(weight_id);
+                                                this_date.remove(position);
+                                                this_weight.remove(position);
+                                                listAdapter.notifyDataSetChanged();
+                                            }
+                                        });
+                                        alertDialog2.show();
+                                        return true;
+                                    }
+                                });
                             }
                         });
 

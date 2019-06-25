@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:layout_weight="40"
+            android:layout_weight="100"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:text="Your next appointments: " />
 
@@ -42,7 +42,7 @@
             android:visibility="gone"
             android:textSize="20sp"
             android:textAlignment="center"
-            android:layout_weight="40"
+            android:layout_weight="100"
             android:text="No appointment set " />
 
     </LinearLayout>
